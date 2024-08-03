@@ -1,0 +1,11 @@
+/* Add this to your CSS file */
+.half-globe {
+    height: 100vh; /* Adjust the height as needed */
+    overflow: hidden; /* Hides the part of the globe outside this container */
+    width: 100%;
+  }
+  
+  .half-globe .globe-container {
+    height: 200%; /* Ensures the globe fits well within its container */
+  }
+  
