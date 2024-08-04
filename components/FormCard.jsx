@@ -5,18 +5,25 @@ import { Button, FormInpt } from "@/constant";
 import { CustomCheckbox } from "@/components/customCheckbox";
 import { Tooltip } from "@/components/Tooltip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const validationSchema = Yup.object().shape({
   personName: Yup.string().required("Name is required"),
   phone: Yup.string()
     .required("Phone is required")
-    .matches(/^[0-9()+-\s]+$/, "Phone number can only contain digits, spaces, and the symbols +, -, ().")
-    .test('min-digits', 'Phone number must contain at least 10 digits', value => {
-      const digits = value.replace(/\D/g, ''); // Remove non-digit characters
-      return digits.length >= 6;
-    }),
+    .matches(
+      /^[0-9()+-\s]+$/,
+      "Phone number can only contain digits, spaces, and the symbols +, -, ()."
+    )
+    .test(
+      "min-digits",
+      "Phone number must contain at least 10 digits",
+      (value) => {
+        const digits = value.replace(/\D/g, ""); // Remove non-digit characters
+        return digits.length >= 6;
+      }
+    ),
   email: Yup.string().email("Invalid email").required("Email is required"),
   businessName: Yup.string().required("Business name is required"),
   industry: Yup.string().required("Industry is required"),
@@ -43,6 +50,7 @@ const FormCard = ({ onClose }) => {
   const handleNext = (validateForm, values) => {
     validateForm().then((errors) => {
       if (Object.keys(errors).length === 0) {
+        console.log("handleNext");
         setStep((prevStep) => prevStep + 1);
       }
     });
@@ -56,6 +64,22 @@ const FormCard = ({ onClose }) => {
     setFieldValue(fieldName, !value);
   };
 
+  const handleSubmit = async (values) => {
+    console.log(step);
+    try {
+      const response = await axios.post("/api/submit", values, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("Lead created successfully in Zoho CRM", response.data);
+    } catch (error) {
+      console.error(
+        "Error creating lead in Zoho CRM:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 mt-20">
@@ -104,7 +128,7 @@ const FormCard = ({ onClose }) => {
             console.log("Form data", values);
           }}
         >
-          {({ values, setFieldValue, validateForm, handleSubmit }) => (
+          {({ values, setFieldValue, validateForm }) => (
             <Form className="flex-grow">
               {step === 1 && (
                 <>
@@ -581,11 +605,13 @@ const FormCard = ({ onClose }) => {
                 {step > 1 && <Button value="Back" onClick={handleBack} />}
                 <Button
                   value={step === 2 ? "Submit" : "Next"}
-                  onClick={
-                    step === 2
-                      ? handleSubmit
-                      : () => handleNext(validateForm, values)
-                  }
+                  onClick={() => {
+                    if (step === 2) {
+                      handleSubmit(values);
+                    } else {
+                      handleNext(validateForm, values);
+                    }
+                  }}
                 />
               </div>
             </Form>
