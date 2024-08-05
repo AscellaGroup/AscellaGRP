@@ -2,13 +2,20 @@
 
 import dynamic from 'next/dynamic';
 const World = dynamic(() => import('@/components/Globe').then(mod => mod.World), { ssr: false });
-import { Bubble, Nav, FormCard } from '@/constant'
+import { Bubble, Nav, FormCard, Button } from '@/constant'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import CalendlyButton from '@/components/CalendlyPopup';
+import VerticalCardOne from '@/components/VerticalCardOne';
+
 import "./Globe.css";
+
+import Logo1 from "@/public/Ascella-Infosec.svg";
 
 const Home = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState(null);
+
 
   const handleShowForm = () => {
     setIsFormVisible(true);
@@ -16,6 +23,10 @@ const Home = () => {
 
   const handleCloseForm = () => {
     setIsFormVisible(false);
+  };
+
+  const handleCardHover = (cardNumber, isHovered) => {
+    setHoveredCard(isHovered ? cardNumber : null);
   };
 
   const globeConfig = {
@@ -43,7 +54,7 @@ const Home = () => {
       endLng: -75.5398,
       color: 'white',
       name: 'California, USA to Delaware, USA',
-       altitude: 0.1 // Altitude for this arc
+      altitude: 0.1 // Altitude for this arc
     },
     // Delaware to Finland
     {
@@ -53,7 +64,7 @@ const Home = () => {
       endLng: 25.7482,
       color: 'white',
       name: 'Delaware, USA to Finland',
-       altitude: 0.1 // Altitude for this arc
+      altitude: 0.1 // Altitude for this arc
     },
     // Finland to Singapore
     {
@@ -63,7 +74,7 @@ const Home = () => {
       endLng: 103.8198,
       color: 'white',
       name: 'Finland to Singapore',
-       altitude: 0.15 // Altitude for this arc
+      altitude: 0.15 // Altitude for this arc
     },
     // Singapore to Canada - Prince Edward Island
     {
@@ -73,7 +84,7 @@ const Home = () => {
       endLng: -63.7115,
       color: 'white',
       name: 'Singapore to Prince Edward Island, Canada',
-       altitude: 0.3 // Altitude for this arc
+      altitude: 0.3 // Altitude for this arc
     },
     // Canada - Prince Edward Island to Calgary
     {
@@ -83,7 +94,7 @@ const Home = () => {
       endLng: -114.0719,
       color: 'white',
       name: 'Prince Edward Island, Canada to Calgary, Canada',
-       altitude: 0.1 // Altitude for this arc
+      altitude: 0.1 // Altitude for this arc
     },
     // Calgary to India - Chandigarh
     {
@@ -93,7 +104,7 @@ const Home = () => {
       endLng: 76.7794,
       color: 'white',
       name: 'Calgary, Canada to Chandigarh, India',
-       altitude: 0.2 // Altitude for this arc
+      altitude: 0.2 // Altitude for this arc
     },
     // Chandigarh to UP
     {
@@ -103,7 +114,7 @@ const Home = () => {
       endLng: 80.9462,
       color: 'white',
       name: 'Chandigarh, India to Uttar Pradesh, India',
-       altitude: 0.1 // Altitude for this arc
+      altitude: 0.1 // Altitude for this arc
     },
     // UP to Mumbai
     {
@@ -113,7 +124,7 @@ const Home = () => {
       endLng: 72.8777,
       color: 'white',
       name: 'Uttar Pradesh, India to Mumbai, India',
-       altitude: 0.1 // Altitude for this arc
+      altitude: 0.1 // Altitude for this arc
     },
     // Mumbai to Bangalore
     {
@@ -123,7 +134,7 @@ const Home = () => {
       endLng: 77.5946,
       color: 'white',
       name: 'Mumbai, India to Bangalore, India',
-       altitude: 0.1 // Altitude for this arc
+      altitude: 0.1 // Altitude for this arc
     },
     // Bangalore to Dubai
     {
@@ -133,19 +144,19 @@ const Home = () => {
       endLng: 55.296249,
       color: 'white',
       name: 'Bangalore, India to Dubai',
-       altitude: 0.1 // Altitude for this arc
+      altitude: 0.1 // Altitude for this arc
     }
   ];
 
   return (
-    <div className='bg-bl-10 h-screen overflow-y-scroll'>
+    <div className='bg-bl-10 h-screen overflow-x-hidden'>
       <Nav onShowForm={handleShowForm} />
       <div className='max-container padding-container text-center mt-36 w-5/6 relative'>
         <div className='absolute left-10'>
           <Bubble width={80} height={80} />
         </div>
         <p className='montserrat text-[40px] font-bold text-white uppercase'>
-          Transforming 
+          Transforming
           <span className='relative'>
             <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#3AFAD9] to-[#003930] mx-2'>
               Challenges
@@ -156,11 +167,9 @@ const Home = () => {
         <p className='mt-9 text-[#8A8A8A] nanumgothic font-regular text-[25px]'>
           Elevate with Innovation, Excel with Us.
         </p>
-        <Link href="https://calendly.com/ascellagroup" passHref>
-          <button className='montserrat text-white text-[18px] font-normal border-2 rounded-full border-[#1AD1B2] p-3 px-4 mt-10'>
-            Schedule a Meeting
-          </button>
-        </Link>
+
+        <CalendlyButton />
+
         <div className='absolute right-0 top-0 mt-52 mr-4'>
           <Bubble width={70} height={70} />
         </div>
@@ -174,10 +183,22 @@ const Home = () => {
         </div>
         {isFormVisible && <FormCard onClose={handleCloseForm} />}
       </div>
-      <div className='flex flex-row mt-10 gap-1'>
-        <span className='w-[700px] h-full min-h-[530px] bg-gradient-to-b from-[#3B3C5C] to-[#181927] hover:w-[1250px] ease-in transition-all duration-500 delay-150 flex items-center justify-center text-white montserrat text-[25px]'>
-          Ascella Infosec
-        </span>
+
+      <div className='flex flex-row mt-10 gap-1 h-screen'>
+        <VerticalCardOne
+          number="1"
+          logo={Logo1}
+          logoSize={200}
+          title="Ascella Infosec"
+          description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+          ctaText="Call to Action"
+          stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
+          backgroundImage="/Vertical-1.svg"
+          bubbles={['/bubble1.svg', '/bubble1.svg', '/bubble1.svg']}
+          onHover={(isHovered) => handleCardHover(1, isHovered)}
+          isExpanded={hoveredCard === 1}
+        />
+
         <span className='w-[300px] h-full min-h-[530px] bg-gradient-to-b from-[#3F3F3F] to-[#000000] hover:w-[400px] ease-out transition-all duration-500 delay-150 flex items-center justify-center text-white montserrat text-[25px]'>
           Software Labs
         </span>
@@ -192,6 +213,8 @@ const Home = () => {
         </span>
       </div>
     </div>
+
+
   );
 };
 
