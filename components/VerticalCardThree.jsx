@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-const VerticalCardOne = ({ number, logo, logoSize = 200, title, description, ctaText, stats, backgroundImage, collapsedBackgroundImage, bubbles, onHover, isExpanded }) => {
+const VerticalCardThree = ({ number, logo, logoSize = 200, title, description, ctaText, stats, backgroundImage, collapsedBackgroundImage, bubbles, onHover, isExpanded }) => {
   return (
     <span
       className={`h-full min-h-[430px] ${
@@ -65,7 +65,7 @@ const VerticalCardOne = ({ number, logo, logoSize = 200, title, description, cta
                 color: 'transparent',
                 lineHeight: '0.8',
                 textShadow: 'none',
-                WebkitTextStroke: '1px #ffffff',
+                WebkitTextStroke: '1px #000000',
               }}
             >
               {number}
@@ -75,10 +75,10 @@ const VerticalCardOne = ({ number, logo, logoSize = 200, title, description, cta
             </div>
           </div>
 
-          <div className='text-sm montserrat text-[#B8B8B8] font-light'>
+          <div className='text-sm montserrat text-[#000000] font-light'>
             {description}
           </div>
-          <button className="px-6 py-3 text-white text-lg font-medium bg-transparent border border-gray-600 rounded-full hover:border-green-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 self-start mt-4">
+          <button className="px-6 py-3 text-white text-lg font-medium bg-transparent border border-gray-300 rounded-full hover:border-green-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 self-start mt-4">
             {ctaText}
           </button>
           <div className="flex justify-center items-center space-x-4 text-[#B8B8B8] text-[18px] font-semibold montserrat mt-4">
@@ -95,4 +95,4 @@ const VerticalCardOne = ({ number, logo, logoSize = 200, title, description, cta
   );
 };
 
-export default VerticalCardOne;
+export default VerticalCardThree;

@@ -2,20 +2,32 @@
 
 import dynamic from 'next/dynamic';
 const World = dynamic(() => import('@/components/Globe').then(mod => mod.World), { ssr: false });
+
 import { Bubble, Nav, FormCard, Button } from '@/constant'
-import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import CalendlyButton from '@/components/CalendlyPopup';
 import VerticalCardOne from '@/components/VerticalCardOne';
+import VerticalCardThree from '@/components/VerticalCardThree';
 
 import "./Globe.css";
 
 import Logo1 from "@/public/Ascella-Infosec.svg";
+import Logo2 from "@/public/Software-Labs.svg";
+import Logo3 from "@/public/Ascella-Staffing.svg";
+import Logo4 from "@/public/Ascella-Engage.svg";
+import Logo5 from "@/public/Ascella-Forge.svg";
+
+
+const MemoizedWorld = React.memo(World);
+const MemoizedVerticalCardOne = React.memo(VerticalCardOne);
+const MemoizedVerticalCardThree = React.memo(VerticalCardThree);
 
 const Home = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState(null);
+  const [expandedCard, setExpandedCard] = useState(1);
+  const [isHovering, setIsHovering] = useState(false);
 
+  const intervalRef = useRef(null);
 
   const handleShowForm = () => {
     setIsFormVisible(true);
@@ -25,11 +37,33 @@ const Home = () => {
     setIsFormVisible(false);
   };
 
-  const handleCardHover = (cardNumber, isHovered) => {
-    setHoveredCard(isHovered ? cardNumber : null);
+  const startAutoExpand = () => {
+    if (intervalRef.current) return;
+    intervalRef.current = setInterval(() => {
+      if (!isHovering) {
+        setExpandedCard((prevCard) => (prevCard % 5) + 1);
+      }
+    }, 2000);
   };
 
-  const globeConfig = {
+  const stopAutoExpand = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    startAutoExpand();
+    return () => stopAutoExpand();
+  }, [isHovering]);
+
+  const handleCardHover = (cardId, hovering) => {
+    setExpandedCard(cardId);
+    setIsHovering(hovering);
+  };
+
+  const globeConfig = useMemo(() => ({
     pointSize: 1,
     atmosphereColor: "#ffffff",
     showAtmosphere: true,
@@ -43,10 +77,9 @@ const Home = () => {
     arcLength: 0.9,
     rings: 1,
     maxRings: 3
-  };
+  }), []);
 
-  const data = [
-    // USA - California to Delaware
+  const data = useMemo(() => [
     {
       startLat: 37.6688,
       startLng: -121.8758,
@@ -54,9 +87,8 @@ const Home = () => {
       endLng: -75.5398,
       color: 'white',
       name: 'California, USA to Delaware, USA',
-      altitude: 0.1 // Altitude for this arc
+      altitude: 0.1
     },
-    // Delaware to Finland
     {
       startLat: 39.7411,
       startLng: -75.5398,
@@ -64,9 +96,8 @@ const Home = () => {
       endLng: 25.7482,
       color: 'white',
       name: 'Delaware, USA to Finland',
-      altitude: 0.1 // Altitude for this arc
+      altitude: 0.1
     },
-    // Finland to Singapore
     {
       startLat: 61.9241,
       startLng: 25.7482,
@@ -74,9 +105,8 @@ const Home = () => {
       endLng: 103.8198,
       color: 'white',
       name: 'Finland to Singapore',
-      altitude: 0.15 // Altitude for this arc
+      altitude: 0.15
     },
-    // Singapore to Canada - Prince Edward Island
     {
       startLat: 1.3521,
       startLng: 103.8198,
@@ -84,9 +114,8 @@ const Home = () => {
       endLng: -63.7115,
       color: 'white',
       name: 'Singapore to Prince Edward Island, Canada',
-      altitude: 0.3 // Altitude for this arc
+      altitude: 0.3
     },
-    // Canada - Prince Edward Island to Calgary
     {
       startLat: 46.3484,
       startLng: -63.7115,
@@ -94,9 +123,8 @@ const Home = () => {
       endLng: -114.0719,
       color: 'white',
       name: 'Prince Edward Island, Canada to Calgary, Canada',
-      altitude: 0.1 // Altitude for this arc
+      altitude: 0.1
     },
-    // Calgary to India - Chandigarh
     {
       startLat: 51.0447,
       startLng: -114.0719,
@@ -104,9 +132,8 @@ const Home = () => {
       endLng: 76.7794,
       color: 'white',
       name: 'Calgary, Canada to Chandigarh, India',
-      altitude: 0.2 // Altitude for this arc
+      altitude: 0.2
     },
-    // Chandigarh to UP
     {
       startLat: 30.7333,
       startLng: 76.7794,
@@ -114,9 +141,8 @@ const Home = () => {
       endLng: 80.9462,
       color: 'white',
       name: 'Chandigarh, India to Uttar Pradesh, India',
-      altitude: 0.1 // Altitude for this arc
+      altitude: 0.1
     },
-    // UP to Mumbai
     {
       startLat: 26.8467,
       startLng: 80.9462,
@@ -124,9 +150,8 @@ const Home = () => {
       endLng: 72.8777,
       color: 'white',
       name: 'Uttar Pradesh, India to Mumbai, India',
-      altitude: 0.1 // Altitude for this arc
+      altitude: 0.1
     },
-    // Mumbai to Bangalore
     {
       startLat: 19.0760,
       startLng: 72.8777,
@@ -134,9 +159,8 @@ const Home = () => {
       endLng: 77.5946,
       color: 'white',
       name: 'Mumbai, India to Bangalore, India',
-      altitude: 0.1 // Altitude for this arc
+      altitude: 0.1
     },
-    // Bangalore to Dubai
     {
       startLat: 12.9716,
       startLng: 77.5946,
@@ -144,12 +168,12 @@ const Home = () => {
       endLng: 55.296249,
       color: 'white',
       name: 'Bangalore, India to Dubai',
-      altitude: 0.1 // Altitude for this arc
+      altitude: 0.1
     }
-  ];
+  ], []);
 
   return (
-    <div className='bg-bl-10 h-screen overflow-x-hidden'>
+    <div className='bg-bl-10 h-screen overflow-y-scroll'>
       <Nav onShowForm={handleShowForm} />
       <div className='max-container padding-container text-center mt-36 w-5/6 relative'>
         <div className='absolute left-10'>
@@ -175,7 +199,7 @@ const Home = () => {
         </div>
         <div className='flexCenter mt-0'>
           <div className='half-globe'>
-            <World globeConfig={globeConfig} data={data} />
+            <MemoizedWorld globeConfig={globeConfig} data={data} />
           </div>
         </div>
         <div className='absolute left-44 top-0 mt-96 mr-4'>
@@ -184,37 +208,83 @@ const Home = () => {
         {isFormVisible && <FormCard onClose={handleCloseForm} />}
       </div>
 
-      <div className='flex flex-row mt-10 gap-1 h-screen'>
-        <VerticalCardOne
+      <div className='flex flex-row mt-10 gap-1 h-screen justify-center'>
+        <MemoizedVerticalCardOne
           number="1"
           logo={Logo1}
           logoSize={200}
-          title="Ascella Infosec"
+          title="INFOSEC"
           description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
           ctaText="Call to Action"
           stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
           backgroundImage="/Vertical-1.svg"
+          collapsedBackgroundImage="/CollapsedBG.svg"
           bubbles={['/bubble1.svg', '/bubble1.svg', '/bubble1.svg']}
           onHover={(isHovered) => handleCardHover(1, isHovered)}
-          isExpanded={hoveredCard === 1}
+          isExpanded={expandedCard === 1}
         />
 
-        <span className='w-[300px] h-full min-h-[530px] bg-gradient-to-b from-[#3F3F3F] to-[#000000] hover:w-[400px] ease-out transition-all duration-500 delay-150 flex items-center justify-center text-white montserrat text-[25px]'>
-          Software Labs
-        </span>
-        <span className='w-[300px] h-full min-h-[530px] bg-gradient-to-b from-[#3F3F3F] to-[#000000] hover:w-[400px] ease-out transition-all duration-500 delay-150 flex items-center justify-center text-white montserrat text-[25px]'>
-          Staffing
-        </span>
-        <span className='w-[300px] h-full min-h-[530px] bg-gradient-to-b from-[#3F3F3F] to-[#000000] hover:w-[400px] ease-out transition-all duration-500 delay-150 flex items-center justify-center text-white montserrat text-[25px]'>
-          Engage
-        </span>
-        <span className='w-[300px] h-full min-h-[530px] bg-gradient-to-b from-[#3F3F3F] to-[#000000] hover:w-[400px] ease-out transition-all duration-500 delay-150 flex items-center justify-center text-white montserrat text-[25px]'>
-          Forge
-        </span>
+        <MemoizedVerticalCardOne
+          number="2"
+          logo={Logo2}
+          logoSize={200}
+          title="SOFTWARE"
+          description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+          ctaText="Call to Action"
+          stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
+          backgroundImage="/Vertical-1.svg"
+          collapsedBackgroundImage="/CollapsedBG.svg"
+          bubbles={['/bubble1.svg', '/bubble1.svg', '/bubble1.svg']}
+          onHover={(isHovered) => handleCardHover(2, isHovered)}
+          isExpanded={expandedCard === 2}
+        />
+
+        <MemoizedVerticalCardThree
+          number="3"
+          logo={Logo3}
+          logoSize={200}
+          title="STAFFING"
+          description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+          ctaText="Call to Action"
+          stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
+          backgroundImage="/Vertical-3.svg"
+          collapsedBackgroundImage="/CollapsedBG.svg"
+          bubbles={['/bubble2.svg', '/bubble2.svg', '/bubble2.svg']}
+          onHover={(isHovered) => handleCardHover(3, isHovered)}
+          isExpanded={expandedCard === 3}
+        />
+
+        <MemoizedVerticalCardThree
+          number="4"
+          logo={Logo4}
+          logoSize={200}
+          title="ENGAGE"
+          description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+          ctaText="Call to Action"
+          stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
+          backgroundImage="/Vertical-3.svg"
+          collapsedBackgroundImage="/CollapsedBG.svg"
+          bubbles={['/bubble2.svg', '/bubble2.svg', '/bubble2.svg']}
+          onHover={(isHovered) => handleCardHover(4, isHovered)}
+          isExpanded={expandedCard === 4}
+        />
+
+        <MemoizedVerticalCardOne
+          number="5"
+          logo={Logo5}
+          logoSize={200}
+          title="FORGE"
+          description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+          ctaText="Call to Action"
+          stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
+          backgroundImage="/Vertical-5.svg"
+          collapsedBackgroundImage="/CollapsedBG.svg"
+          bubbles={['/bubble3.svg', '/bubble3.svg', '/bubble3.svg']}
+          onHover={(isHovered) => handleCardHover(5, isHovered)}
+          isExpanded={expandedCard === 5}
+        />
       </div>
     </div>
-
-
   );
 };
 

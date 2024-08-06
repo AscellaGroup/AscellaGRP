@@ -11,6 +11,7 @@ module.exports = {
       inter: ['Inter', 'sans-serif'],
       montserrat: ['montserrat', 'sans-serif'],
       cambria: ['Cambria', 'serif'],
+      almarai: ['almarai', 'sans-serif'],
     },
       colors: {
         bl: {
