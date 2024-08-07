@@ -26,6 +26,8 @@ const Home = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [expandedCard, setExpandedCard] = useState(1);
   const [isHovering, setIsHovering] = useState(false);
+  const [isVerticalSectionVisible, setIsVerticalSectionVisible] = useState(false);
+  const verticalSectionRef = useRef(null);
 
   const intervalRef = useRef(null);
 
@@ -62,6 +64,31 @@ const Home = () => {
     setExpandedCard(cardId);
     setIsHovering(hovering);
   };
+
+  // Globe-Vertical Intersection 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVerticalSectionVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1
+      }
+    );
+
+    if (verticalSectionRef.current) {
+      observer.observe(verticalSectionRef.current);
+    }
+
+    return () => {
+      if (verticalSectionRef.current) {
+        observer.unobserve(verticalSectionRef.current);
+      }
+    };
+  }, []);
 
   const globeConfig = useMemo(() => ({
     pointSize: 1,
@@ -172,118 +199,132 @@ const Home = () => {
     }
   ], []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className='bg-bl-10 h-screen overflow-y-scroll'>
+    <div className='bg-bl-10 h-screen overflow-y-scroll scroll-smooth' style={{ scrollSnapType: 'y mandatory' }}>
       <Nav onShowForm={handleShowForm} />
-      <div className='max-container padding-container text-center mt-36 w-5/6 relative'>
-        <div className='absolute left-10'>
-          <Bubble width={80} height={80} />
-        </div>
-        <p className='montserrat text-[40px] font-bold text-white uppercase'>
-          Transforming
-          <span className='relative'>
-            <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#3AFAD9] to-[#003930] mx-2'>
-              Challenges
+      <section className='snap-start flex flex-col justify-center items-center' style={{ scrollSnapAlign: 'start' }}>
+        <div className='max-container padding-container text-center mt-36 w-5/6 relative'>
+          <div className='absolute left-10'>
+            <Bubble width={80} height={80} />
+          </div>
+          <p className='montserrat text-[40px] font-bold text-white uppercase'>
+            Transforming
+            <span className='relative'>
+              <span className='text-transparent bg-clip-text bg-gradient-to-r from-[#3AFAD9] to-[#003930] mx-2'>
+                Challenges
+              </span>
             </span>
-          </span>
-          into Opportunities.
-        </p>
-        <p className='mt-9 text-[#8A8A8A] nanumgothic font-regular text-[25px]'>
-          Elevate with Innovation, Excel with Us.
-        </p>
+            into Opportunities.
+          </p>
+          <p className='mt-9 text-[#8A8A8A] nanumgothic font-regular text-[25px]'>
+            Elevate with Innovation, Excel with Us.
+          </p>
 
-        <CalendlyButton />
+          <CalendlyButton />
 
-        <div className='absolute right-0 top-0 mt-52 mr-4'>
-          <Bubble width={70} height={70} />
-        </div>
-        <div className='flexCenter mt-0'>
-          <div className='half-globe'>
-            <MemoizedWorld globeConfig={globeConfig} data={data} />
+          <div className='absolute right-0 top-0 mt-52 mr-4'>
+            <Bubble width={70} height={70} />
           </div>
         </div>
-        <div className='absolute left-44 top-0 mt-96 mr-4'>
+      </section>
+
+      <section className='snap-start flex justify-center items-center' style={{ scrollSnapAlign: 'start' }}>
+        <div className='half-globe'>
+          <MemoizedWorld globeConfig={globeConfig} data={data} />
+        </div>
+        <div className='absolute left-44 bottom-20 mr-4'>
           <Bubble width={40} height={40} />
         </div>
-        {isFormVisible && <FormCard onClose={handleCloseForm} />}
-      </div>
+      </section>
 
-      <div className='flex flex-row mt-10 gap-1 h-screen justify-center'>
-        <MemoizedVerticalCardOne
-          number="1"
-          logo={Logo1}
-          logoSize={200}
-          title="INFOSEC"
-          description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-          ctaText="Call to Action"
-          stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
-          backgroundImage="/Vertical-1.svg"
-          collapsedBackgroundImage="/CollapsedBG.svg"
-          bubbles={['/bubble1.svg', '/bubble1.svg', '/bubble1.svg']}
-          onHover={(isHovered) => handleCardHover(1, isHovered)}
-          isExpanded={expandedCard === 1}
-        />
 
-        <MemoizedVerticalCardOne
-          number="2"
-          logo={Logo2}
-          logoSize={200}
-          title="SOFTWARE"
-          description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-          ctaText="Call to Action"
-          stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
-          backgroundImage="/Vertical-1.svg"
-          collapsedBackgroundImage="/CollapsedBG.svg"
-          bubbles={['/bubble1.svg', '/bubble1.svg', '/bubble1.svg']}
-          onHover={(isHovered) => handleCardHover(2, isHovered)}
-          isExpanded={expandedCard === 2}
-        />
 
-        <MemoizedVerticalCardThree
-          number="3"
-          logo={Logo3}
-          logoSize={200}
-          title="STAFFING"
-          description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-          ctaText="Call to Action"
-          stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
-          backgroundImage="/Vertical-3.svg"
-          collapsedBackgroundImage="/CollapsedBG.svg"
-          bubbles={['/bubble2.svg', '/bubble2.svg', '/bubble2.svg']}
-          onHover={(isHovered) => handleCardHover(3, isHovered)}
-          isExpanded={expandedCard === 3}
-        />
+    <section 
+        ref={verticalSectionRef}
+        className={`h-screen w-full snap-start flex flex-col justify-center items-center fade-in-section ${isVerticalSectionVisible ? 'is-visible' : ''}`} 
+        style={{scrollSnapAlign: 'start'}}>
+        <div className='flex flex-row mt-10 gap-1 h-screen justify-center'>
+          <MemoizedVerticalCardOne
+            number="1"
+            logo={Logo1}
+            logoSize={200}
+            title="INFOSEC"
+            description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+            ctaText="Call to Action"
+            stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
+            backgroundImage="/Vertical-1.svg"
+            collapsedBackgroundImage="/CollapsedBG.svg"
+            bubbles={['/bubble1.svg', '/bubble1.svg', '/bubble1.svg']}
+            onHover={(isHovered) => handleCardHover(1, isHovered)}
+            isExpanded={expandedCard === 1}
+          />
 
-        <MemoizedVerticalCardThree
-          number="4"
-          logo={Logo4}
-          logoSize={200}
-          title="ENGAGE"
-          description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-          ctaText="Call to Action"
-          stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
-          backgroundImage="/Vertical-3.svg"
-          collapsedBackgroundImage="/CollapsedBG.svg"
-          bubbles={['/bubble2.svg', '/bubble2.svg', '/bubble2.svg']}
-          onHover={(isHovered) => handleCardHover(4, isHovered)}
-          isExpanded={expandedCard === 4}
-        />
+          <MemoizedVerticalCardOne
+            number="2"
+            logo={Logo2}
+            logoSize={200}
+            title="SOFTWARE"
+            description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+            ctaText="Call to Action"
+            stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
+            backgroundImage="/Vertical-1.svg"
+            collapsedBackgroundImage="/CollapsedBG.svg"
+            bubbles={['/bubble1.svg', '/bubble1.svg', '/bubble1.svg']}
+            onHover={(isHovered) => handleCardHover(2, isHovered)}
+            isExpanded={expandedCard === 2}
+          />
 
-        <MemoizedVerticalCardOne
-          number="5"
-          logo={Logo5}
-          logoSize={200}
-          title="FORGE"
-          description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-          ctaText="Call to Action"
-          stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
-          backgroundImage="/Vertical-5.svg"
-          collapsedBackgroundImage="/CollapsedBG.svg"
-          bubbles={['/bubble3.svg', '/bubble3.svg', '/bubble3.svg']}
-          onHover={(isHovered) => handleCardHover(5, isHovered)}
-          isExpanded={expandedCard === 5}
-        />
-      </div>
+          <MemoizedVerticalCardThree
+            number="3"
+            logo={Logo3}
+            logoSize={200}
+            title="STAFFING"
+            description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+            ctaText="Call to Action"
+            stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
+            backgroundImage="/Vertical-3.svg"
+            collapsedBackgroundImage="/CollapsedBG.svg"
+            bubbles={['/bubble2.svg', '/bubble2.svg', '/bubble2.svg']}
+            onHover={(isHovered) => handleCardHover(3, isHovered)}
+            isExpanded={expandedCard === 3}
+          />
+
+          <MemoizedVerticalCardThree
+            number="4"
+            logo={Logo4}
+            logoSize={200}
+            title="ENGAGE"
+            description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+            ctaText="Call to Action"
+            stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
+            backgroundImage="/Vertical-3.svg"
+            collapsedBackgroundImage="/CollapsedBG.svg"
+            bubbles={['/bubble2.svg', '/bubble2.svg', '/bubble2.svg']}
+            onHover={(isHovered) => handleCardHover(4, isHovered)}
+            isExpanded={expandedCard === 4}
+          />
+
+          <MemoizedVerticalCardOne
+            number="5"
+            logo={Logo5}
+            logoSize={200}
+            title="FORGE"
+            description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+            ctaText="Call to Action"
+            stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
+            backgroundImage="/Vertical-5.svg"
+            collapsedBackgroundImage="/CollapsedBG.svg"
+            bubbles={['/bubble3.svg', '/bubble3.svg', '/bubble3.svg']}
+            onHover={(isHovered) => handleCardHover(5, isHovered)}
+            isExpanded={expandedCard === 5}
+          />
+        </div>
+      </section>
+      {isFormVisible && <FormCard onClose={handleCloseForm} />}
     </div>
   );
 };
