@@ -16,6 +16,9 @@ import Logo2 from "@/public/Software-Labs.svg";
 import Logo3 from "@/public/Ascella-Staffing.svg";
 import Logo4 from "@/public/Ascella-Engage.svg";
 import Logo5 from "@/public/Ascella-Forge.svg";
+import AnimatedCursor from 'react-animated-cursor';
+import Loader from '@/components/Loader';
+
 
 
 const MemoizedWorld = React.memo(World);
@@ -204,6 +207,13 @@ const Home = () => {
   }, []);
 
   return (
+    <>
+
+    <AnimatedCursor
+    color='255, 255, 255'
+    innerScale={1}
+    outerScale={5.5} />
+    <Loader/>
     <div className='bg-bl-10 h-screen overflow-y-scroll scroll-smooth' style={{ scrollSnapType: 'y mandatory' }}>
       <Nav onShowForm={handleShowForm} />
       <section className='snap-start flex flex-col justify-center items-center' style={{ scrollSnapAlign: 'start' }}>
@@ -326,6 +336,7 @@ const Home = () => {
       </section>
       {isFormVisible && <FormCard onClose={handleCloseForm} />}
     </div>
+    </>
   );
 };
 

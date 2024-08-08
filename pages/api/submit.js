@@ -61,6 +61,7 @@ export default async function handler(req, res) {
       });
       res.status(200).json(response.data);
     } catch (error) {
+      console.log(error)
       console.error('Error creating lead in Zoho CRM:', error.response ? error.response.data : error.message);
       res.status(500).json({ error: 'Error creating lead in Zoho CRM' });
     }
