@@ -87,9 +87,10 @@ const FormCard = ({ onClose }) => {
         ref={formRef}
         className="bg-gradient-to-b from-[#15171D] to-[#040811] p-6 rounded-2xl shadow-lg w-[600px] max-h-[80vh] min-h-[500px] border-[1.2px] border-[#414141] flex flex-col overflow-y-auto"
       >
-        <h1 className="montserrat text-white text-[25px] font-medium pb-6 mt-0">
+        <h1 className="montserrat text-center text-white text-[25px] font-medium pb-6 mt-0">
           Ascella for Startups
         </h1>
+
 
         <Formik
           initialValues={{
@@ -104,24 +105,26 @@ const FormCard = ({ onClose }) => {
             defensiveSecurity: false,
             grcAudits: false,
             softwareDevelopment: false,
-            web2Development: false,
+            application: false,
             web3Development: false,
-            gameDevelopment: false,
+            devsecops: false,
             cloudServices: false,
             staffing: false,
-            hrOperations: false,
-            payrollManagement: false,
+            hrOutsourcing: false,
+            payrollOutsourcing: false,
             rpo: false,
             fullTimeHiring: false,
-            contractualHiring: false,
+            contractualStaffing: false,
             engage: false,
             businessDevelopmentOutsourcing: false,
             businessProcessOutsourcing: false,
             salesEnablement: false,
+            revenueGeneration: false,
             forge: false,
-            clientAcquisition: false,
             growthConsulting: false,
-            digitalMarketing: false,
+            marketing: false,
+            branding: false,
+            demandGeneration: false,
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
@@ -132,7 +135,9 @@ const FormCard = ({ onClose }) => {
             <Form className="flex-grow">
               {step === 1 && (
                 <>
-                  <div className="lg:px-10 max-container mt-12">
+                  <div className="lg:px-10 max-container mt-0">
+                    <h5 className="montserrat text-center text-[#888888] text-[15px] font-medium pb-6 mt-0">If your startup has at least 8 employees, less than 1 million USD in funding, or an ARR (Annual Recurring Revenue) below 0.5 million USD,
+                      it qualifies for Ascella for Startups.</h5>
                     <div className="flex flex-row gap-10">
                       <FormInpt label="Name" name="personName" />
                       <FormInpt label="Phone" name="phone" />
@@ -250,14 +255,14 @@ const FormCard = ({ onClose }) => {
                       <div className="ml-6 space-y-2">
                         <div className="flex flex-center">
                           <CustomCheckbox
-                            name="web2Development"
-                            label="Web2 Development"
-                            checked={values.web2Development}
+                            name="application"
+                            label="Application"
+                            checked={values.application}
                             onChange={() =>
                               handleCheckboxChange(
                                 setFieldValue,
-                                "web2Development",
-                                values.web2Development
+                                "application",
+                                values.application
                               )
                             }
                           />
@@ -268,6 +273,8 @@ const FormCard = ({ onClose }) => {
                             />
                           </Tooltip>
                         </div>
+
+
                         <div className="flex flex-center">
                           <CustomCheckbox
                             name="web3Development"
@@ -290,18 +297,18 @@ const FormCard = ({ onClose }) => {
                         </div>
                         <div className="flex flex-center">
                           <CustomCheckbox
-                            name="gameDevelopment"
-                            label="Game Development"
-                            checked={values.gameDevelopment}
+                            name="devsecops"
+                            label="DevSecOps"
+                            checked={values.devsecops}
                             onChange={() =>
                               handleCheckboxChange(
                                 setFieldValue,
-                                "gameDevelopment",
-                                values.gameDevelopment
+                                "devsecops",
+                                values.devsecops
                               )
                             }
                           />
-                          <Tooltip content="---">
+                          <Tooltip content="CI/CD Integration, Automated Testing, Security Integration, and related practices">
                             <FontAwesomeIcon
                               icon={faQuestionCircle}
                               className="ml-2 cursor-pointer text-white fa-sm"
@@ -346,14 +353,34 @@ const FormCard = ({ onClose }) => {
                       <div className="ml-6 space-y-2">
                         <div className="flex flex-center">
                           <CustomCheckbox
-                            name="hrOperations"
-                            label="HR Operations"
-                            checked={values.hrOperations}
+                            name="contractualStaffing"
+                            label="Contractual Staffing"
+                            checked={values.contractualStaffing}
                             onChange={() =>
                               handleCheckboxChange(
                                 setFieldValue,
-                                "hrOperations",
-                                values.hrOperations
+                                "contractualStaffing",
+                                values.contractualStaffing
+                              )
+                            }
+                          />
+                          <Tooltip content="Providing skilled professionals on a contract basis, Temporary Staffing Solutions, and additional services">
+                            <FontAwesomeIcon
+                              icon={faQuestionCircle}
+                              className="ml-2 cursor-pointer text-white fa-sm"
+                            />
+                          </Tooltip>
+                        </div>
+                        <div className="flex flex-center">
+                          <CustomCheckbox
+                            name="hrOutsourcing"
+                            label="HR Outsourcing"
+                            checked={values.hrOutsourcing}
+                            onChange={() =>
+                              handleCheckboxChange(
+                                setFieldValue,
+                                "hrOutsourcing",
+                                values.hrOutsourcing
                               )
                             }
                           />
@@ -366,14 +393,14 @@ const FormCard = ({ onClose }) => {
                         </div>
                         <div className="flex flex-center">
                           <CustomCheckbox
-                            name="payrollManagement"
-                            label="Payroll Management"
-                            checked={values.payrollManagement}
+                            name="payrollOutsourcing"
+                            label="Payroll Outsourcing"
+                            checked={values.payrollOutsourcing}
                             onChange={() =>
                               handleCheckboxChange(
                                 setFieldValue,
-                                "payrollManagement",
-                                values.payrollManagement
+                                "payrollOutsourcing",
+                                values.payrollOutsourcing
                               )
                             }
                           />
@@ -384,10 +411,11 @@ const FormCard = ({ onClose }) => {
                             />
                           </Tooltip>
                         </div>
+
                         <div className="flex flex-center">
                           <CustomCheckbox
                             name="rpo"
-                            label="RPO (Recruitment Process Outsourcing)"
+                            label="RPO"
                             checked={values.rpo}
                             onChange={() =>
                               handleCheckboxChange(
@@ -397,47 +425,7 @@ const FormCard = ({ onClose }) => {
                               )
                             }
                           />
-                          <Tooltip content="---">
-                            <FontAwesomeIcon
-                              icon={faQuestionCircle}
-                              className="ml-2 cursor-pointer text-white fa-sm"
-                            />
-                          </Tooltip>
-                        </div>
-                        <div className="flex flex-center">
-                          <CustomCheckbox
-                            name="fullTimeHiring"
-                            label="Full Time Hiring"
-                            checked={values.fullTimeHiring}
-                            onChange={() =>
-                              handleCheckboxChange(
-                                setFieldValue,
-                                "fullTimeHiring",
-                                values.fullTimeHiring
-                              )
-                            }
-                          />
-                          <Tooltip content="---">
-                            <FontAwesomeIcon
-                              icon={faQuestionCircle}
-                              className="ml-2 cursor-pointer text-white fa-sm"
-                            />
-                          </Tooltip>
-                        </div>
-                        <div className="flex flex-center">
-                          <CustomCheckbox
-                            name="contractualHiring"
-                            label="Contractual Hiring"
-                            checked={values.contractualHiring}
-                            onChange={() =>
-                              handleCheckboxChange(
-                                setFieldValue,
-                                "contractualHiring",
-                                values.contractualHiring
-                              )
-                            }
-                          />
-                          <Tooltip content="Providing skilled professionals on a contract basis, Temporary Staffing Solutions, and additional services">
+                          <Tooltip content="Recruitment Process Outsourcing">
                             <FontAwesomeIcon
                               icon={faQuestionCircle}
                               className="ml-2 cursor-pointer text-white fa-sm"
@@ -463,7 +451,7 @@ const FormCard = ({ onClose }) => {
                         <div className="flex flex-center">
                           <CustomCheckbox
                             name="businessDevelopmentOutsourcing"
-                            label="Business Development Outsourcing"
+                            label="Business Development/Account Management"
                             checked={values.businessDevelopmentOutsourcing}
                             onChange={() =>
                               handleCheckboxChange(
@@ -502,6 +490,26 @@ const FormCard = ({ onClose }) => {
                         </div>
                         <div className="flex flex-center">
                           <CustomCheckbox
+                            name="revenueGeneration"
+                            label="Revenue Generation"
+                            checked={values.revenueGeneration}
+                            onChange={() =>
+                              handleCheckboxChange(
+                                setFieldValue,
+                                "revenueGeneration",
+                                values.revenueGeneration
+                              )
+                            }
+                          />
+                          <Tooltip content="Implementing strategies and activities aimed at increasing revenue streams, along with additional measures">
+                            <FontAwesomeIcon
+                              icon={faQuestionCircle}
+                              className="ml-2 cursor-pointer text-white fa-sm"
+                            />
+                          </Tooltip>
+                        </div>
+                        <div className="flex flex-center">
+                          <CustomCheckbox
                             name="salesEnablement"
                             label="Sales Enablement"
                             checked={values.salesEnablement}
@@ -520,6 +528,7 @@ const FormCard = ({ onClose }) => {
                             />
                           </Tooltip>
                         </div>
+
                       </div>
                     )}
                     <CustomCheckbox
@@ -538,26 +547,6 @@ const FormCard = ({ onClose }) => {
                       <div className="ml-6 space-y-2">
                         <div className="flex flex-center">
                           <CustomCheckbox
-                            name="clientAcquisition"
-                            label="Client Acquisition"
-                            checked={values.clientAcquisition}
-                            onChange={() =>
-                              handleCheckboxChange(
-                                setFieldValue,
-                                "clientAcquisition",
-                                values.clientAcquisition
-                              )
-                            }
-                          />
-                          <Tooltip content="---">
-                            <FontAwesomeIcon
-                              icon={faQuestionCircle}
-                              className="ml-2 cursor-pointer text-white fa-sm"
-                            />
-                          </Tooltip>
-                        </div>
-                        <div className="flex flex-control">
-                          <CustomCheckbox
                             name="growthConsulting"
                             label="Growth Consulting"
                             checked={values.growthConsulting}
@@ -569,7 +558,7 @@ const FormCard = ({ onClose }) => {
                               )
                             }
                           />
-                          <Tooltip content="Expert advice and strategies to drive business growth, Optimize Performance, GTM, Achieve long-term success, and more">
+                          <Tooltip content="Expert advice and strategies to drive business growth, optimize performance, GTM, achieve long-term success, and more">
                             <FontAwesomeIcon
                               icon={faQuestionCircle}
                               className="ml-2 cursor-pointer text-white fa-sm"
@@ -578,18 +567,58 @@ const FormCard = ({ onClose }) => {
                         </div>
                         <div className="flex flex-control">
                           <CustomCheckbox
-                            name="digitalMarketing"
-                            label="Digital Marketing"
-                            checked={values.digitalMarketing}
+                            name="marketing"
+                            label="Marketing"
+                            checked={values.marketing}
                             onChange={() =>
                               handleCheckboxChange(
                                 setFieldValue,
-                                "digitalMarketing",
-                                values.digitalMarketing
+                                "marketing",
+                                values.marketing
                               )
                             }
                           />
                           <Tooltip content="SEO, SEM, Social Media Marketing, Content Marketing, Email Marketing, and other strategies">
+                            <FontAwesomeIcon
+                              icon={faQuestionCircle}
+                              className="ml-2 cursor-pointer text-white fa-sm"
+                            />
+                          </Tooltip>
+                        </div>
+                        <div className="flex flex-control">
+                          <CustomCheckbox
+                            name="branding"
+                            label="Branding"
+                            checked={values.branding}
+                            onChange={() =>
+                              handleCheckboxChange(
+                                setFieldValue,
+                                "branding",
+                                values.branding
+                              )
+                            }
+                          />
+                          <Tooltip content="Brand Identity Development, Brand Strategy, Brand positioning, and related services">
+                            <FontAwesomeIcon
+                              icon={faQuestionCircle}
+                              className="ml-2 cursor-pointer text-white fa-sm"
+                            />
+                          </Tooltip>
+                        </div>
+                        <div className="flex flex-control">
+                          <CustomCheckbox
+                            name="demandGeneration"
+                            label="Demand Generation"
+                            checked={values.demandGeneration}
+                            onChange={() =>
+                              handleCheckboxChange(
+                                setFieldValue,
+                                "demandGeneration",
+                                values.demandGeneration
+                              )
+                            }
+                          />
+                          <Tooltip content="Strategies to identify and acquire potential customers, urturing leads through the sales funnel, and more">
                             <FontAwesomeIcon
                               icon={faQuestionCircle}
                               className="ml-2 cursor-pointer text-white fa-sm"

@@ -22,8 +22,6 @@ import Loader from '@/components/Loader';
 
 
 
-
-
 const MemoizedWorld = React.memo(World);
 const MemoizedVerticalCardOne = React.memo(VerticalCardOne);
 const MemoizedVerticalCardThree = React.memo(VerticalCardThree);
@@ -33,9 +31,9 @@ const Home = () => {
   const [expandedCard, setExpandedCard] = useState(1);
   const [isHovering, setIsHovering] = useState(false);
   const [isVerticalSectionVisible, setIsVerticalSectionVisible] = useState(false);
-  const verticalSectionRef = useRef(null);
 
   const intervalRef = useRef(null);
+  const verticalSectionRef = useRef(null);
 
   const handleShowForm = () => {
     setIsFormVisible(true);
@@ -77,7 +75,8 @@ const Home = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVerticalSectionVisible(true);
-          observer.unobserve(entry.target);
+        } else {
+          setIsVerticalSectionVisible(false);
         }
       },
       {
@@ -85,26 +84,40 @@ const Home = () => {
       }
     );
 
+    const handleScroll = () => {
+      if (globeSectionRef.current && verticalSectionRef.current) {
+        const globeBottom = globeSectionRef.current.getBoundingClientRect().bottom;
+        const verticalTop = verticalSectionRef.current.getBoundingClientRect().top;
+
+        if (globeBottom > 0 && verticalTop > window.innerHeight) {
+          setIsVerticalSectionVisible(false);
+        }
+      }
+    };
+
     if (verticalSectionRef.current) {
       observer.observe(verticalSectionRef.current);
     }
+
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       if (verticalSectionRef.current) {
         observer.unobserve(verticalSectionRef.current);
       }
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   // Verticals Staggered Animation
   const staggerVariants = {
-    hidden: { opacity: 0, y: 100 },
+    hidden: { opacity: 0, y: 1000 },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       transition: {
         delay: i * 0.5,
-        duration: 1,
+        duration: 0.5,
       },
     }),
   };
@@ -266,6 +279,7 @@ const Home = () => {
         <section className='snap-start flex justify-center items-center' style={{ scrollSnapAlign: 'start' }}>
           <div className='half-globe'>
             <MemoizedWorld globeConfig={globeConfig} data={data} />
+            
           </div>
 
         </section>
@@ -287,7 +301,7 @@ const Home = () => {
                   logo={Logo1}
                   logoSize={200}
                   title="INFOSEC"
-                  description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+                  description="Ascella Infosec delivers end-to-end cybersecurity services and solutions, including cutting-edge Web3 technologies, standing as your trusted partner in security."
                   ctaText="Call to Action"
                   stats={["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"]}
                   backgroundImage="/Vertical-1.svg"
