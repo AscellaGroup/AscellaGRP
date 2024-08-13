@@ -9,17 +9,17 @@ const Nav = ({ onShowForm }) => {
       <Link href="/">
         <Image
           src='/Ascella-logo.svg'
-          alt="Ascell_logo"
+          alt="Ascella_logo"
           width={45}
           height={45}
         />
       </Link>
 
-    {/* For PC and Tablet */}
-      <div className="hidden md:flex items-center gap-12">
+      {/* For PC and Tablet */}
+      <div className="hidden h-full gap-12 lg:flex ml-32">
         <Image
           src='/Ascella-text.svg'
-          alt="Ascell_logo"
+          alt="Ascella_logo"
           width={200}
           height={200}
         />
@@ -33,7 +33,7 @@ const Nav = ({ onShowForm }) => {
         <button className='border-[1px] border-[#8A8A8A] p-1 px-[7px] py-[5px] rounded-[5px]'>
           <Image
             src='/Arrow.svg'
-            alt="Ascell_logo"
+            alt="Ascella_logo"
             width={10}
             height={10}
           />
@@ -44,10 +44,10 @@ const Nav = ({ onShowForm }) => {
       <div className='flex md:hidden items-center gap-3'>
         <button onClick={onShowForm}>
           <Image
-          src='/Ascella-text.svg'
-          alt="Ascell_logo"
-          width={30}
-          height={30}
+            src='/Ascella-text.svg'
+            alt="Ascella_logo"
+            width={30}
+            height={30}
           />
         </button>
       </div>

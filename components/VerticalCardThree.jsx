@@ -81,7 +81,7 @@ const VerticalCardThree = ({ number, logo, logoSize = 200, title, description, c
           <button className="px-6 py-3 text-white text-lg font-medium bg-transparent border border-gray-300 rounded-full hover:border-green-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 self-start mt-4">
             {ctaText}
           </button>
-          <div className="flex justify-center items-center space-x-4 text-[#B8B8B8] text-[18px] font-semibold montserrat mt-4">
+          <div className="flex justify-center items-center text-center space-x-4 text-[#B8B8B8] text-[12px] font-semibold montserrat mt-4">
             {stats.map((stat, index) => (
               <React.Fragment key={index}>
                 <span>{stat}</span>

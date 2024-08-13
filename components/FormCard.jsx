@@ -82,12 +82,12 @@ const FormCard = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 mt-20">
+    <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 mt-20 px-4 sm:px-6 lg:px-8">
       <div
         ref={formRef}
-        className="bg-gradient-to-b from-[#15171D] to-[#040811] p-6 rounded-2xl shadow-lg w-[600px] max-h-[80vh] min-h-[500px] border-[1.2px] border-[#414141] flex flex-col overflow-y-auto"
+        className="bg-gradient-to-b from-[#15171D] to-[#040811] p-4 sm:p-6 rounded-2xl shadow-lg w-full max-w-[600px] max-h-[90vh] min-h-[500px] border-[1.2px] border-[#414141] flex flex-col overflow-y-auto"
       >
-        <h1 className="montserrat text-center text-white text-[25px] font-medium pb-6 mt-0">
+        <h1 className="montserrat text-center text-white text-[20px] sm:text-[25px] font-medium pb-4 sm:pb-6 mt-0">
           Ascella for Startups
         </h1>
 
@@ -135,23 +135,27 @@ const FormCard = ({ onClose }) => {
             <Form className="flex-grow">
               {step === 1 && (
                 <>
-                  <div className="lg:px-10 max-container mt-0">
-                    <h5 className="montserrat text-center text-[#888888] text-[15px] font-medium pb-6 mt-0">If your startup has at least 8 employees, less than 1 million USD in funding, or an ARR (Annual Recurring Revenue) below 0.5 million USD,
-                      it qualifies for Ascella for Startups.</h5>
-                    <div className="flex flex-row gap-10">
-                      <FormInpt label="Name" name="personName" />
-                      <FormInpt label="Phone" name="phone" />
+                  <div className="mt-0">
+                    <span className="flex text-red-400">*
+                      <h5 className="montserrat text-center italic text-[#888888] text-[10px] sm:text-[12px] font-light pb-4 sm:pb-6 mt-0">If your startup has at least 8 employees, less than 1 million USD in funding, or an ARR (Annual Recurring Revenue) below 0.5 million USD,
+                        it qualifies for Ascella for Startups.</h5>
+                    </span>
+
+                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 justify-center items-center">
+                      <FormInpt label="Name" name="personName" className="w-full sm:w-1/2/" />
+                      <FormInpt label="Phone" name="phone" className="w-full sm:w-1/2" />
                     </div>
-                    <div className="flex flex-row gap-10 mt-7">
-                      <FormInpt label="Email" name="email" />
+                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 mt-4 sm:mt-7 justify-center items-center">
+                      <FormInpt label="Email" name="email" className="w-full sm:w-1/2" />
                       <FormInpt
                         label="Legal Business Name"
                         name="businessName"
+                        className="w-full sm:w-1/2"
                       />
                     </div>
-                    <div className="flex flex-row gap-10 mt-7">
-                      <FormInpt label="Industry" name="industry" />
-                      <FormInpt label="Registered Address" name="address" />
+                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 mt-4 sm:mt-7 justify-center items-center">
+                      <FormInpt label="Industry" name="industry" className="w-full sm:w-1/2" />
+                      <FormInpt label="Registered Address" name="address" className="w-full sm:w-1/2" />
                     </div>
                   </div>
                 </>
@@ -159,7 +163,7 @@ const FormCard = ({ onClose }) => {
               {step === 2 && (
                 <>
                   <div className="flex flex-col gap-4 mt-4 montserrat text-[#888888] text-left">
-                    <h5 className="montserrat text-[#888888] text-[18px]">
+                    <h5 className="montserrat text-[#888888] text-[16px] sm:text-[18px]">
                       Which side our assistance required?
                     </h5>
 
@@ -176,7 +180,7 @@ const FormCard = ({ onClose }) => {
                       }
                     />
                     {values.cyberSecurity && (
-                      <div className="ml-6 space-y-2">
+                      <div className="ml-6 sm:ml-6 space-y-2">
                         <div className="flex items-center">
                           <CustomCheckbox
                             name="offensiveSecurity"
@@ -252,11 +256,11 @@ const FormCard = ({ onClose }) => {
                       }
                     />
                     {values.softwareDevelopment && (
-                      <div className="ml-6 space-y-2">
+                      <div className="ml-6 sm:ml-6 space-y-2">
                         <div className="flex flex-center">
                           <CustomCheckbox
                             name="application"
-                            label="Application"
+                            label="Application Development"
                             checked={values.application}
                             onChange={() =>
                               handleCheckboxChange(
@@ -350,7 +354,7 @@ const FormCard = ({ onClose }) => {
                       }
                     />
                     {values.staffing && (
-                      <div className="ml-6 space-y-2">
+                      <div className="ml-6 sm:ml-6 space-y-2">
                         <div className="flex flex-center">
                           <CustomCheckbox
                             name="contractualStaffing"
@@ -447,7 +451,7 @@ const FormCard = ({ onClose }) => {
                       }
                     />
                     {values.engage && (
-                      <div className="ml-6 space-y-2">
+                      <div className="ml-6 sm:ml-6 space-y-2">
                         <div className="flex flex-center">
                           <CustomCheckbox
                             name="businessDevelopmentOutsourcing"
@@ -544,7 +548,7 @@ const FormCard = ({ onClose }) => {
                       }
                     />
                     {values.forge && (
-                      <div className="ml-6 space-y-2">
+                      <div className="ml-6 sm:ml-6 space-y-2">
                         <div className="flex flex-center">
                           <CustomCheckbox
                             name="growthConsulting"
@@ -630,7 +634,7 @@ const FormCard = ({ onClose }) => {
                   </div>
                 </>
               )}
-              <div className="flex justify-between lg:px-12 max-container mt-10">
+              <div className="flex justify-between mt-6 sm:mt-10 ">
                 {step > 1 && <Button value="Back" onClick={handleBack} />}
                 <Button
                   value={step === 2 ? "Submit" : "Next"}
