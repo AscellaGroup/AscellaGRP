@@ -15,7 +15,7 @@ const Nav = ({ onShowForm }) => {
         />
       </Link>
 
-      <div className="hidden h-full gap-12 lg:flex">
+      <div className="hidden h-full gap-12 lg:flex ml-32">
         <Image
           src='/Ascella-text.svg'
           alt="Ascell_logo"
