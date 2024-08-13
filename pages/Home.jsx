@@ -183,7 +183,7 @@ const Home = () => {
               <Bubble width={50} height={50} />
             </div>
 
-            <p className="montserrat text-[40px] font-bold text-white uppercase">
+            <p id="pInHome" className="montserrat text-[40px] font-bold text-white uppercase">
               Transforming
               <span className="relative">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3AFAD9] to-[#003930] mx-2">

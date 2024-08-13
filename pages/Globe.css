@@ -9,3 +9,43 @@
   height: 200%; /* Ensures the globe fits well within its container */
 }
 
+@media only screen and (max-width: 1053px) {
+  .half-globe{
+      height: 70vh;
+  }
+
+}
+
+
+@media only screen and (max-width: 803px) {
+  .half-globe{
+      height: 50vh;
+  }
+
+}
+
+@media only screen and (max-width: 603px) {
+  .half-globe{
+      height: 45vh;
+  }
+
+}
+
+
+@media only screen and (max-width: 960px) {
+  #pInHome{
+   font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  #pInHome{
+   font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  #pInHome{
+   font-size: 16px;
+  }
+}
