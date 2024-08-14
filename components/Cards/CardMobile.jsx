@@ -124,7 +124,7 @@ export function CardMobile() {
           </div>
         ))}
       </div>
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-2">
         {cards.map((_, index) => (
           <div
             key={index}

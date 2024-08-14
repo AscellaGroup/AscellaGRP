@@ -5,7 +5,7 @@ const VerticalCardThree = ({ number, logo, logoSize = 200, title, description, c
   return (
     <span
       className={`h-full min-h-[430px] ${
-        isExpanded ? 'w-[600px]' : 'w-[200px]'
+        isExpanded ? 'w-[600px]' : 'w-[150px] md:w-[200px] lg:w-[200px]'
       } transition-all duration-500 ease-in-out flex items-center p-20 text-white montserrat text-[25px] flex-col justify-between bg-cover bg-center relative overflow-hidden`}
       style={{
         backgroundImage: `url('${isExpanded ? backgroundImage : collapsedBackgroundImage}')`,
