@@ -7,7 +7,7 @@ const World = dynamic(
 );
 
 import { Bubble, Nav, FormCard } from "@/constant";
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 import CalendlyButton from "@/components/CalendlyPopup";
 
@@ -166,18 +166,17 @@ const Home = () => {
       <AnimatedCursor color="255, 255, 255" innerScale={1} outerScale={5.5} />
       <Loader />
       <div
-        className={`bg-bl-10 h-screen overflow-y-auto ${
-          isMobile ? "" : "snap-y snap-mandatory"
-        }`}
+        className={`bg-bl-10 h-screen overflow-y-auto ${isMobile ? "" : "snap-y snap-mandatory"
+          }`}
       >
         <Nav onShowForm={handleShowForm} />
         <section
-          className="snap-start flex flex-col justify-center items-center"
+          className="snap-start flex flex-col justify-center items-center h-[55vh]"
           style={{ scrollSnapAlign: "start" }}
         >
           <div className="max-container padding-container text-center mt-36 w-5/6 relative">
-            <div className="absolute left-10">
-              <Bubble width={80} height={80} />
+            <div className="absolute left-10 bottom-56">
+              <Bubble width={70} height={70} />
             </div>
             <div className="absolute left-44 -bottom-52 mr-4">
               <Bubble width={50} height={50} />
@@ -212,11 +211,15 @@ const Home = () => {
             <MemoizedWorld globeConfig={globeConfig} data={data} />
           </div>
         </section>
-      
+
         <Card />
-        
+
         {isFormVisible && <FormCard onClose={handleCloseForm} />}
       </div>
+      <div className='fixed text-sm montserrat text-[#B8B8B8] font-light -mt-6 ml-8'>
+        Copyright @ Ascella Groups
+      </div>
+
     </>
   );
 };
