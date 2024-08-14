@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import CardDesktop from "./CardDesktop";
 import { CardMobile } from "./CardMobile";
 
-
 const Card = () => {
   const [desktop, setDesktop] = useState(false);
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setDesktop(window.innerWidth > 1024);
+      setDesktop(window.innerWidth > 1400);
     };
     checkScreenSize();
     window.addEventListener("resize", checkScreenSize);

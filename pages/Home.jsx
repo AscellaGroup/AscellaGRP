@@ -25,7 +25,7 @@ const Home = () => {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1024); // Adjust breakpoint as needed
+      setIsMobile(window.innerWidth <= 1400); // Adjust breakpoint as needed
     };
 
     checkMobile();

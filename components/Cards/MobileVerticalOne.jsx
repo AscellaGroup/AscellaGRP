@@ -11,6 +11,7 @@ const MobileVerticalOne = ({
   stats,
   backgroundImage,
   bubbles,
+  onCtaClick,
 }) => {
   return (
     <div
@@ -73,7 +74,10 @@ const MobileVerticalOne = ({
           <p className="text-lg md:text-xl font-light  text-[#B8B8B8] mb-8 max-w-2xl">
             {description}
           </p>
-          <button className="px-8 py-3 text-lg mt-3 font-semibold bg-transparent border text-white rounded-full hover:bg-opacity-90 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 self-start">
+          <button
+            onClick={onCtaClick}
+            className="px-8 py-3 text-lg mt-3 font-semibold bg-transparent border text-white rounded-full hover:bg-opacity-90 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 self-start"
+          >
             {ctaText}
           </button>
         </div>
@@ -82,7 +86,9 @@ const MobileVerticalOne = ({
         <div className="flex justify-between items-center mt-8 border-t border-white border-opacity-20 pt-6">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="text-sm text-center md:text-3xl font-bold -mt-44 text-[#B8B8B8]">{stat}</div>
+              <div className="text-sm text-center md:text-3xl font-bold -mt-44 text-[#B8B8B8]">
+                {stat}
+              </div>
             </div>
           ))}
         </div>

@@ -11,6 +11,7 @@ const MobileVerticalThree = ({
   stats,
   backgroundImage,
   bubbles,
+  onCtaClick,
 }) => {
   return (
     <div
@@ -73,7 +74,10 @@ const MobileVerticalThree = ({
           <p className="text-lg md:text-xl font-light text-black mb-8 max-w-2xl">
             {description}
           </p>
-          <button className="px-8 py-3 text-lg mt-3 font-semibold bg-transparent text-white border rounded-full hover:bg-opacity-90 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 self-start">
+          <button
+            onClick={onCtaClick}
+            className="px-8 py-3 text-lg mt-3 font-semibold bg-transparent text-white border rounded-full hover:bg-opacity-90 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 self-start"
+          >
             {ctaText}
           </button>
         </div>

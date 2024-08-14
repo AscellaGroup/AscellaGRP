@@ -3,6 +3,7 @@ import Image from 'next/image';
 import FormCard from './FormCard';
 
 const VerticalCardOne = ({ number, logo, logoSize = 200, title, description, ctaText, stats, backgroundImage, collapsedBackgroundImage, bubbles, onHover, isExpanded }) => {
+  
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const handleOpenForm = () => {
