@@ -73,6 +73,7 @@ const FormCard = ({ onClose }) => {
         },
       });
       console.log("Lead created successfully in Zoho CRM", response.data);
+      onClose(); // Close the form after successful submission
     } catch (error) {
       console.error(
         "Error creating lead in Zoho CRM:",
