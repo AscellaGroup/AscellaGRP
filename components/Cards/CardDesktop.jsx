@@ -8,7 +8,7 @@ import "./style.css";
 import "../../pages/Globe.css";
 
 import Logo1 from "@/public/Ascella-Infosec.svg";
-import Logo2 from "@/public/Software-Labs.svg";
+import Logo2 from "@/public/Ascella-Software-Labs.svg";
 import Logo3 from "@/public/Ascella-Staffing.svg";
 import Logo4 from "@/public/Ascella-Engage.svg";
 import Logo5 from "@/public/Ascella-Forge.svg";
@@ -133,7 +133,7 @@ function CardDesktop() {
               logoSize={200}
               title="INFOSEC"
               description="Ascella Infosec delivers end-to-end cybersecurity services and solutions, including cutting-edge Web3 technologies, standing as your trusted partner in security."
-              ctaText="Connect with Us"
+              ctaText="Connect Us"
               stats={["Offensive Security", "Defensive Security", "Government Risk & Compliances"]}
               backgroundImage="/Vertical-1.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
@@ -150,7 +150,7 @@ function CardDesktop() {
               logoSize={200}
               title="SOFTWARE LABS"
               description="Ascella Software Labs is where innovation meets execution. Your innovation, our secure integration — we deliver tailored solutions that drive your business forward."
-              ctaText="Connect with Us"
+              ctaText="Connect Us"
               stats={["Software Development", "Web3 Development", "DevSecOps", "Cloud Services"]}
               backgroundImage="/Vertical-1.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
@@ -168,7 +168,7 @@ function CardDesktop() {
               logoSize={200}
               title="STAFFING"
               description="Finding the right talent is essential for your business's success. Ascella Staffing ensures your workforce is well-equipped and managed efficiently, precisely supporting your human capital needs from skilled professionals."
-              ctaText="Connect with Us"
+              ctaText="Connect Us"
               stats={["RPO", "Contractual Staffing", "Human Resource Outsourcing", "Payroll Outsourcing" ]}
               backgroundImage="/Vertical-3.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
@@ -186,7 +186,7 @@ function CardDesktop() {
               logoSize={200}
               title="ENGAGE"
               description="Ascella Engage is your growth partner, We help you seize opportunities, refine sales strategies, and streamline operations for lasting success."
-              ctaText="Connect with Us"
+              ctaText="Connect Us"
               stats={["Business Development", "Business Process Outsourcing", "Revenue Generation", "Sales Enablement"]}
               backgroundImage="/Vertical-3.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
@@ -204,7 +204,7 @@ function CardDesktop() {
               logoSize={200}
               title="FORGE"
               description="Ascella Forge is your strategic partner in brand growth, we craft strategies to boost market presence and drive customer acquisition, building a brand that resonates and endures."
-              ctaText="Connect with Us"
+              ctaText="Connect Us"
               stats={[ "Demand Generation", "Marketing", "Branding", "Growth Consulting"]}
               backgroundImage="/Vertical-5.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
