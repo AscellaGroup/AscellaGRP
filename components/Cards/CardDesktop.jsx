@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import VerticalCardOne from "@/components/VerticalCardOne";
 import VerticalCardThree from "@/components/VerticalCardThree";
+import FormCTA from "@/components/FormCTA";
 import { motion } from "framer-motion";
 
 import "./style.css";
@@ -17,9 +18,20 @@ function CardDesktop() {
   const [expandedCard, setExpandedCard] = useState(1);
   const [isHovering, setIsHovering] = useState(false);
   const [isVerticalSectionVisible, setIsVerticalSectionVisible] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false); // Add this state
+  const [formTitle, setFormTitle] = useState(""); // Add this state
 
   const intervalRef = useRef(null);
   const verticalSectionRef = useRef(null);
+
+  const handleOpenForm = (title) => {
+    setIsFormOpen(true);
+    setFormTitle(title);
+  };
+
+  const handleCloseForm = () => {
+    setIsFormOpen(false);
+  };
 
   const startAutoExpand = () => {
     if (intervalRef.current) return;
@@ -121,13 +133,14 @@ function CardDesktop() {
               logoSize={200}
               title="INFOSEC"
               description="Ascella Infosec delivers end-to-end cybersecurity services and solutions, including cutting-edge Web3 technologies, standing as your trusted partner in security."
-              ctaText="Call to Action"
+              ctaText="Connect with Us"
               stats={["Offensive Security", "Defensive Security", "Government Risk & Compliances"]}
               backgroundImage="/Vertical-1.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
               bubbles={["/bubble1.svg", "/bubble1.svg", "/bubble1.svg"]}
               onHover={(isHovered) => handleCardHover(1, isHovered)}
               isExpanded={expandedCard === 1}
+              onCtaClick={() => handleOpenForm("InfoSec")}
             />
           </motion.div>
           <motion.div key={2} custom={2} variants={staggerVariants}>
@@ -135,15 +148,16 @@ function CardDesktop() {
               number="2"
               logo={Logo2}
               logoSize={200}
-              title="SOFTWARE"
+              title="SOFTWARE LABS"
               description="Ascella Software Labs is where innovation meets execution. Your innovation, our secure integration — we deliver tailored solutions that drive your business forward."
-              ctaText="Call to Action"
+              ctaText="Connect with Us"
               stats={["Software Development", "Web3 Development", "DevSecOps", "Cloud Services"]}
               backgroundImage="/Vertical-1.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
               bubbles={["/bubble1.svg", "/bubble1.svg", "/bubble1.svg"]}
               onHover={(isHovered) => handleCardHover(2, isHovered)}
               isExpanded={expandedCard === 2}
+              onCtaClick={() => handleOpenForm("Software Labs")}
             />
           </motion.div>
 
@@ -154,13 +168,14 @@ function CardDesktop() {
               logoSize={200}
               title="STAFFING"
               description="Finding the right talent is essential for your business's success. Ascella Staffing ensures your workforce is well-equipped and managed efficiently, precisely supporting your human capital needs from skilled professionals."
-              ctaText="Call to Action"
+              ctaText="Connect with Us"
               stats={["RPO", "Contractual Staffing", "Human Resource Outsourcing", "Payroll Outsourcing" ]}
               backgroundImage="/Vertical-3.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
               bubbles={["/bubble2.svg", "/bubble2.svg", "/bubble2.svg"]}
               onHover={(isHovered) => handleCardHover(3, isHovered)}
               isExpanded={expandedCard === 3}
+              onCtaClick={() => handleOpenForm("Staffing")}
             />
           </motion.div>
 
@@ -171,13 +186,14 @@ function CardDesktop() {
               logoSize={200}
               title="ENGAGE"
               description="Ascella Engage is your growth partner, We help you seize opportunities, refine sales strategies, and streamline operations for lasting success."
-              ctaText="Call to Action"
+              ctaText="Connect with Us"
               stats={["Business Development", "Business Process Outsourcing", "Revenue Generation", "Sales Enablement"]}
               backgroundImage="/Vertical-3.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
               bubbles={["/bubble2.svg", "/bubble2.svg", "/bubble2.svg"]}
               onHover={(isHovered) => handleCardHover(4, isHovered)}
               isExpanded={expandedCard === 4}
+              onCtaClick={() => handleOpenForm("Engage")}
             />
           </motion.div>
 
@@ -188,17 +204,19 @@ function CardDesktop() {
               logoSize={200}
               title="FORGE"
               description="Ascella Forge is your strategic partner in brand growth, we craft strategies to boost market presence and drive customer acquisition, building a brand that resonates and endures."
-              ctaText="Call to Action"
+              ctaText="Connect with Us"
               stats={[ "Demand Generation", "Marketing", "Branding", "Growth Consulting"]}
               backgroundImage="/Vertical-5.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
               bubbles={["/bubble3.svg", "/bubble3.svg", "/bubble3.svg"]}
               onHover={(isHovered) => handleCardHover(5, isHovered)}
               isExpanded={expandedCard === 5}
+              onCtaClick={() => handleOpenForm("Forge")}
             />
           </motion.div>
         </div>
       </motion.div>
+      {isFormOpen && <FormCTA onClose={handleCloseForm} cardTitle={formTitle} />}
     </section>
   );
 }

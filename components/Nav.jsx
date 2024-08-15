@@ -16,12 +16,11 @@ const Nav = ({ onShowForm }) => {
       </Link>
 
       {/* For PC and Tablet */}
-      <div className="hidden h-full gap-12 lg:flex ml-32">
-        <Image
+      <div className="gap-10 lg:flex ">
+        <img
+          className='h-24 w-24 md:ml-32 md:h-36 md:w-36'
           src='/Ascella-text.svg'
           alt="Ascella_logo"
-          width={200}
-          height={200}
         />
       </div>
 
@@ -41,16 +40,18 @@ const Nav = ({ onShowForm }) => {
       </div>
 
       {/* Mobile */}
-      <div className='flex md:hidden items-center gap-3'>
+
+      <div className='flex md:hidden border-[1px] border-[#8A8A8A] px-[8px] py-[6px] rounded-[5px] '>
         <button onClick={onShowForm}>
           <Image
-            src='/Ascella-text.svg'
+            src='/Arrow.svg'
             alt="Ascella_logo"
-            width={30}
-            height={30}
+            width={10}
+            height={10}
           />
         </button>
       </div>
+
     </nav>
   )
 }

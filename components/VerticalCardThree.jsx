@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import FormCard from './FormCard'; // Make sure to import FormCard
+import FormCTA from './FormCTA'; // Make sure to import FormCard
 
 const VerticalCardThree = ({ number, logo, logoSize = 200, title, description, ctaText, stats, backgroundImage, collapsedBackgroundImage, bubbles, onHover, isExpanded }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -108,7 +108,7 @@ const VerticalCardThree = ({ number, logo, logoSize = 200, title, description, c
         )}
       </span>
 
-      {isFormOpen && <FormCard onClose={handleCloseForm} />}
+      {isFormOpen && <FormCTA onClose={handleCloseForm} cardTitle={title} />}
     </>
   );
 };

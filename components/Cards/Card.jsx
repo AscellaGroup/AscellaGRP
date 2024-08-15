@@ -7,7 +7,7 @@ const Card = () => {
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setDesktop(window.innerWidth > 1400);
+      setDesktop(window.innerWidth > 1370);
     };
     checkScreenSize();
     window.addEventListener("resize", checkScreenSize);

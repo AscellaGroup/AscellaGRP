@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import MobileVerticalOne from "./MobileVerticalOne";
 import MobileVerticalThree from "./MobileVerticalThree";
-import FormCard from "@/components/FormCard";
+import FormCTA from "@/components/FormCTA";
 
 import Logo1 from "@/public/Ascella-Infosec.svg";
 import Logo2 from "@/public/Software-Labs.svg";
@@ -14,9 +14,15 @@ import Logo5 from "@/public/Ascella-Forge.svg";
 export function CardMobile() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const [formTitle, setFormTitle] = useState("");
 
-  const handleOpenForm = () => {
+  const carouselRef = useRef(null);
+
+  const handleOpenForm = (title) => {
     setIsFormOpen(true);
+    setFormTitle(title);
   };
 
   const handleCloseForm = () => {
@@ -33,7 +39,7 @@ export function CardMobile() {
         title: "INFOSEC",
         description:
           "Ascella Infosec delivers end-to-end cybersecurity services and solutions, including cutting-edge Web3 technologies, standing as your trusted partner in security.",
-        ctaText: "Call to Action",
+        ctaText: "Connect with Us",
         stats: [
           "Offensive Security",
           "Defensive Security",
@@ -42,7 +48,7 @@ export function CardMobile() {
         backgroundImage: "/Vertical-1.svg",
         collapsedBackgroundImage: "/CollapsedBG.svg",
         bubbles: ["/bubble1.svg", "/bubble1.svg", "/bubble1.svg"],
-        onCtaClick: handleOpenForm,
+        onCtaClick: () => handleOpenForm("INFOSEC"),
       },
     },
     {
@@ -54,7 +60,7 @@ export function CardMobile() {
         title: "SOFTWARE",
         description:
           "Ascella Software Labs is where innovation meets execution. Your innovation, our secure integration — we deliver tailored solutions that drive your business forward.",
-        ctaText: "Call to Action",
+        ctaText: "Connect with Us",
         stats: [
           "Software Development",
           "Web3 Development",
@@ -64,7 +70,7 @@ export function CardMobile() {
         backgroundImage: "/Vertical-1.svg",
         collapsedBackgroundImage: "/CollapsedBG.svg",
         bubbles: ["/bubble1.svg", "/bubble1.svg", "/bubble1.svg"],
-        onCtaClick: handleOpenForm,
+        onCtaClick: () => handleOpenForm("SOFTWARE LABS"),
       },
     },
     {
@@ -76,7 +82,7 @@ export function CardMobile() {
         title: "STAFFING",
         description:
           "Finding the right talent is essential for your business's success. Ascella Staffing ensures your workforce is well-equipped and managed efficiently, precisely supporting your human capital needs from skilled professionals.",
-        ctaText: "Call to Action",
+        ctaText: "Connect with Us",
         stats: [
           "RPO",
           "Contractual Staffing",
@@ -86,7 +92,7 @@ export function CardMobile() {
         backgroundImage: "/Vertical-3.svg",
         collapsedBackgroundImage: "/CollapsedBG.svg",
         bubbles: ["/bubble2.svg", "/bubble2.svg", "/bubble2.svg"],
-        onCtaClick: handleOpenForm,
+        onCtaClick: () => handleOpenForm("STAFFING"),
       },
     },
     {
@@ -98,7 +104,7 @@ export function CardMobile() {
         title: "ENGAGE",
         description:
           "Ascella Engage is your growth partner, We help you seize opportunities, refine sales strategies, and streamline operations for lasting success.",
-        ctaText: "Call to Action",
+        ctaText: "Connect with Us",
         stats: [
           "Business Development",
           "Business Process Outsourcing",
@@ -108,7 +114,7 @@ export function CardMobile() {
         backgroundImage: "/Vertical-3.svg",
         collapsedBackgroundImage: "/CollapsedBG.svg",
         bubbles: ["/bubble2.svg", "/bubble2.svg", "/bubble2.svg"],
-        onCtaClick: handleOpenForm,
+        onCtaClick: () => handleOpenForm("ENGAGE"),
       },
     },
     {
@@ -120,7 +126,7 @@ export function CardMobile() {
         title: "FORGE",
         description:
           "Ascella Forge is your strategic partner in brand growth, we craft strategies to boost market presence and drive customer acquisition, building a brand that resonates and endures.",
-        ctaText: "Call to Action",
+        ctaText: "Connect with Us",
         stats: [
           "Demand Generation",
           "Marketing & Branding",
@@ -129,7 +135,7 @@ export function CardMobile() {
         backgroundImage: "/Vertical-5.svg",
         collapsedBackgroundImage: "/CollapsedBG.svg",
         bubbles: ["/bubble3.svg", "/bubble3.svg", "/bubble3.svg"],
-        onCtaClick: handleOpenForm,
+        onCtaClick: () => handleOpenForm("FORGE"),
       },
     },
   ];
@@ -137,6 +143,43 @@ export function CardMobile() {
   const handleSlideChange = (index) => {
     setActiveIndex(index);
   };
+
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % cards.length);
+    } else if (isRightSwipe) {
+      setActiveIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length);
+    }
+  };
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    carousel.addEventListener('touchstart', onTouchStart);
+    carousel.addEventListener('touchmove', onTouchMove);
+    carousel.addEventListener('touchend', onTouchEnd);
+
+    return () => {
+      carousel.removeEventListener('touchstart', onTouchStart);
+      carousel.removeEventListener('touchmove', onTouchMove);
+      carousel.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [onTouchStart, onTouchMove, onTouchEnd]);
 
   return (
     <div className="h-[90vh] w-full relative overflow-hidden">
@@ -151,6 +194,7 @@ export function CardMobile() {
         }
       `}</style>
       <div
+        ref={carouselRef}
         className="custom-carousel h-screen"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
       >
@@ -164,14 +208,14 @@ export function CardMobile() {
         {cards.map((_, index) => (
           <div
             key={index}
-            className={`w-4 h-1 rounded-2xl cursor-pointer transition-all duration-300 ${
+            className={`w-2 h-2 rounded-2xl cursor-pointer transition-all duration-300 ${
               index === activeIndex ? "bg-white" : "bg-gray-400 opacity-50"
             }`}
             onClick={() => handleSlideChange(index)}
           ></div>
         ))}
       </div>
-      {isFormOpen && <FormCard onClose={handleCloseForm} />}
+      {isFormOpen && <FormCTA cardTitle={formTitle} onClose={handleCloseForm} />}
     </div>
   );
 }

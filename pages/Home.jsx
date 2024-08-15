@@ -25,7 +25,7 @@ const Home = () => {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1400); // Adjust breakpoint as needed
+      setIsMobile(window.innerWidth <= 1370); // Adjust breakpoint as needed
     };
 
     checkMobile();
@@ -182,7 +182,7 @@ const Home = () => {
               <Bubble width={50} height={50} />
             </div>
 
-            <p id="pInHome" className="montserrat text-[40px] font-bold text-white uppercase">
+            <p id="pInHome" className="montserrat text-[40px] font-bold -mt-32 md:mt-10 text-white uppercase">
               Transforming
               <span className="relative">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3AFAD9] to-[#003930] mx-2">
@@ -217,7 +217,7 @@ const Home = () => {
         {isFormVisible && <FormCard onClose={handleCloseForm} />}
       </div>
       <div className='fixed text-sm montserrat text-[#B8B8B8] font-light -mt-6 ml-8'>
-        Copyright @ Ascella Groups
+        Copyright @ Ascella Group
       </div>
 
     </>
