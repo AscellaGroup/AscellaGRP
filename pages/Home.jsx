@@ -216,7 +216,7 @@ const Home = () => {
         {isFormVisible && <FormCard onClose={handleCloseForm} />}
       </div>
       <div className='fixed text-sm montserrat text-[#B8B8B8] font-light -mt-6 ml-8'>
-        Copyright @ Ascella Group
+       © Copyright 2024, All Rights Reserved | Ascella Group
       </div>
 
     </>
