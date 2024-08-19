@@ -31,6 +31,14 @@
 
 }
 
+@media only screen and (max-width: 503px) {
+  .half-globe{
+      width: 34vh;
+      height: 43vh;
+  }
+
+}
+
 
 @media only screen and (max-width: 960px) {
   #pInHome{
@@ -53,5 +61,6 @@
 @media only screen and (max-width: 560px) {
   #pInHome{
    letter-spacing: -1px;
+   z-index: 11;
   }
 }
