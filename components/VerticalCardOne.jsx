@@ -17,7 +17,7 @@ const VerticalCardOne = ({ number, logo, logoSize = 200, title, description, cta
   return (
     <>
       <span
-        className={`h-full min-h-[430px] ${isExpanded ? 'w-[600px]' : 'w-[150px] md:w-[200px] lg:w-[200px] '
+        className={`h-full min-h-[430px] ${isExpanded ? 'w-[600px] 2xl:w-[768px]' : 'w-[150px] md:w-[200px] lg:w-[200px] 2xl:w-[270px]'
           } transition-all duration-500 ease-in-out flex items-center p-20 text-white montserrat text-[25px] flex-col justify-between bg-cover bg-center relative overflow-hidden`}
         style={{
           backgroundImage: `url('${isExpanded ? backgroundImage : collapsedBackgroundImage}')`,
@@ -52,12 +52,12 @@ const VerticalCardOne = ({ number, logo, logoSize = 200, title, description, cta
           <div className="absolute inset-0">
             <div className="absolute left-8 top-8 bottom-8 flex items-center">
               <div className="flex">
-                <p className="font-almarai mb-52 whitespace-nowrap text-[#B8B8B8] text-4xl font-bold text-center">
+                <p className="font-almarai mb-52 whitespace-nowrap text-[#B8B8B8] uppercase text-4xl font-bold text-center 2xl:text-5xl">
                   {title.split(' ')[0].split('').map((char, index) => (
                     <span key={index} className="block">{char}</span>
                   ))}
                 </p>
-                <p className="font-almarai -ml-7 mt-[21rem] text-[#B8B8B8] text-4xl font-bold" style={{ letterSpacing: '0.5rem' }}>
+                <p className="font-almarai -ml-7 mt-[21rem] text-[#B8B8B8] uppercase text-4xl font-bold 2xl:text-5xl 2xl:mt-[25rem] 2xl:-ml-9" style={{ letterSpacing: '0.5rem' }}>
                   {title.split(' ')[1]}
                 </p>
               </div>
@@ -92,16 +92,16 @@ const VerticalCardOne = ({ number, logo, logoSize = 200, title, description, cta
               </div>
             </div>
 
-            <div className='text-sm montserrat text-[#B8B8B8] font-light'>
+            <div className='text-sm montserrat text-[#B8B8B8] font-light 2xl:text-xl'>
               {description}
             </div>
             <button
-              className="px-6 py-3 text-white text-lg font-medium bg-transparent border border-gray-600 rounded-full hover:border-green-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 self-start mt-4"
+              className="px-6 py-3 text-white text-lg font-medium bg-transparent border border-gray-600 rounded-full hover:border-green-200 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 self-start mt-4 2xl:text-3xl"
               onClick={handleOpenForm}
             >
               {ctaText}
             </button>
-            <div className="flex justify-center items-center text-center space-x-4 text-[#B8B8B8] text-[12px] font-semibold montserrat mt-4">
+            <div className="flex justify-center items-center text-center space-x-4 text-[#B8B8B8] text-[12px] font-semibold montserrat mt-4 2xl:text-lg">
               {stats.map((stat, index) => (
                 <React.Fragment key={index}>
                   <span>{stat}</span>

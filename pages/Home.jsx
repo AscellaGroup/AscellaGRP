@@ -13,7 +13,6 @@ import CalendlyButton from "@/components/CalendlyPopup";
 
 import "./Globe.css";
 
-import AnimatedCursor from "react-animated-cursor";
 import Loader from "@/components/Loader";
 import Card from "@/components/Cards/Card";
 
@@ -163,7 +162,6 @@ const Home = () => {
 
   return (
     <>
-      <AnimatedCursor color="255, 255, 255" innerScale={1} outerScale={5.5} />
       <Loader />
       <div
         className={`bg-bl-10 h-screen overflow-y-auto ${isMobile ? "" : "snap-y snap-mandatory"
@@ -175,7 +173,7 @@ const Home = () => {
           style={{ scrollSnapAlign: "start" }}
         >
           <div className="max-container padding-container text-center mt-36 w-5/6 relative">
-            <div className="absolute left-10 bottom-56">
+            <div className="absolute left-10 bottom-56 mix-blend-lighten">
               <Bubble width={70} height={70} />
             </div>
             <div className="absolute left-44 -bottom-52 mr-4">
@@ -191,7 +189,7 @@ const Home = () => {
               </span>
               into Opportunities.
             </p>
-            <p className="mt-9 text-[#8A8A8A] nanumgothic font-regular text-[25px]">
+            <p className="mt-9 text-[#8A8A8A] nanumgothic font-regular text-[16px] md:text-[25px]">
               Elevate with Innovation, Excel with Us.
             </p>
 
@@ -211,6 +209,7 @@ const Home = () => {
             <MemoizedWorld globeConfig={globeConfig} data={data} />
           </div>
         </section>
+
 
         <Card />
 

@@ -121,19 +121,19 @@ function CardDesktop() {
       style={{ scrollSnapAlign: "start" }}
     >
       <motion.div
-        className="flex flex-row mt-10 gap-1 h-screen justify-center"
+        className="flex flex-row mt-10 gap-1 h-screen justify-between w-full px-2"
         initial="hidden"
         animate={isVerticalSectionVisible ? "visible" : "hidden"}
       >
-        <div className="flex flex-row mt-10 gap-1 h-screen justify-center">
+        <div className="flex flex-row mt-10 gap-1 h-screen justify-between w-screen">
           <motion.div key={1} custom={1} variants={staggerVariants}>
               <VerticalCardOne
               number="1"
               logo={Logo1}
               logoSize={200}
-              title="INFOSEC"
+              title="InfoSec"
               description="Ascella Infosec delivers end-to-end cybersecurity services and solutions, including cutting-edge Web3 technologies, standing as your trusted partner in security."
-              ctaText="Connect Us"
+              ctaText="Contact Us"
               stats={["Offensive Security", "Defensive Security", "Government Risk & Compliances"]}
               backgroundImage="/Vertical-1.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
@@ -148,9 +148,9 @@ function CardDesktop() {
               number="2"
               logo={Logo2}
               logoSize={200}
-              title="SOFTWARE LABS"
+              title="Software Labs"
               description="Ascella Software Labs is where innovation meets execution. Your innovation, our secure integration — we deliver tailored solutions that drive your business forward."
-              ctaText="Connect Us"
+              ctaText="Contact Us"
               stats={["Software Development", "Web3 Development", "DevSecOps", "Cloud Services"]}
               backgroundImage="/Vertical-1.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
@@ -166,9 +166,9 @@ function CardDesktop() {
               number="3"
               logo={Logo3}
               logoSize={200}
-              title="STAFFING"
+              title="Staffing"
               description="Finding the right talent is essential for your business's success. Ascella Staffing ensures your workforce is well-equipped and managed efficiently, precisely supporting your human capital needs from skilled professionals."
-              ctaText="Connect Us"
+              ctaText="Contact Us"
               stats={["RPO", "Contractual Staffing", "Human Resource Outsourcing", "Payroll Outsourcing" ]}
               backgroundImage="/Vertical-3.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
@@ -184,9 +184,9 @@ function CardDesktop() {
               number="4"
               logo={Logo4}
               logoSize={200}
-              title="ENGAGE"
+              title="Engage"
               description="Ascella Engage is your growth partner, We help you seize opportunities, refine sales strategies, and streamline operations for lasting success."
-              ctaText="Connect Us"
+              ctaText="Contact Us"
               stats={["Business Development", "Business Process Outsourcing", "Revenue Generation", "Sales Enablement"]}
               backgroundImage="/Vertical-3.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"
@@ -202,9 +202,9 @@ function CardDesktop() {
               number="5"
               logo={Logo5}
               logoSize={200}
-              title="FORGE"
+              title="Forge"
               description="Ascella Forge is your strategic partner in brand growth, we craft strategies to boost market presence and drive customer acquisition, building a brand that resonates and endures."
-              ctaText="Connect Us"
+              ctaText="Contact Us"
               stats={[ "Demand Generation", "Marketing", "Branding", "Growth Consulting"]}
               backgroundImage="/Vertical-5.svg"
               collapsedBackgroundImage="/CollapsedBG.svg"

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Button, FormInpt } from "@/constant";
 import { CustomCheckbox } from "@/components/customCheckbox";
@@ -82,16 +82,28 @@ const FormCTA = ({ onClose, cardTitle }) => {
     }
   };
 
+  const handleClose = () => {
+    onClose();
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 mt-20 px-4 sm:px-6 lg:px-8">
       <div
         ref={formRef}
-        className="bg-gradient-to-b from-[#15171D] to-[#040811] p-4 sm:p-6 rounded-2xl shadow-lg w-full max-w-[600px] max-h-[90vh] min-h-[500px] border-[1.2px] border-[#414141] flex flex-col overflow-y-auto"
+        className="bg-gradient-to-b from-[#15171D] to-[#040811] p-4 sm:p-6 rounded-2xl shadow-lg w-full max-w-[600px] max-h-[90vh] min-h-[500px] border-[1.2px] border-[#414141] flex flex-col overflow-y-auto relative"
       >
-        <h1 className="montserrat text-center text-white text-[20px] sm:text-[25px] font-medium pb-4 sm:pb-6 mt-0">
-          Contact Us - {cardTitle}
-        </h1>
+        <button
+          onClick={handleClose}
+          className="absolute top-2 right-2 text-white hover:text-gray-300 focus:outline-none"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
 
+        <h1 className="montserrat text-center text-white text-[20px] sm:text-[25px] font-medium pb-4 sm:pb-6 mt-0">
+          Contact Us - Ascella {cardTitle}
+        </h1>
 
         <Formik
           initialValues={{
@@ -137,7 +149,6 @@ const FormCTA = ({ onClose, cardTitle }) => {
               {step === 1 && (
                 <>
                   <div className="mt-0">
-
                     <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 justify-center items-center">
                       <FormInpt label="Name" name="personName" className="w-full sm:w-1/2/" />
                       <FormInpt label="Phone" name="phone" className="w-full sm:w-1/2" />
@@ -159,7 +170,7 @@ const FormCTA = ({ onClose, cardTitle }) => {
               )}
               {step === 2 && (
                 <>
-                  <div className="flex flex-col gap-4 mt-4 montserrat text-[#888888] text-left">
+                <div className="flex flex-col gap-4 mt-4 montserrat text-[#888888] text-left">
                     <h5 className="montserrat text-[#888888] text-[16px] sm:text-[18px]">
                       Which side our assistance required?
                     </h5>
