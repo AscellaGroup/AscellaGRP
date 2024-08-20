@@ -121,7 +121,7 @@ function CardDesktop() {
       style={{ scrollSnapAlign: "start" }}
     >
       <motion.div
-        className="flex flex-row mt-10 gap-1 h-screen justify-between w-full px-2"
+        className="flex flex-row mt-10 h-screen justify-between w-full px-1"
         initial="hidden"
         animate={isVerticalSectionVisible ? "visible" : "hidden"}
       >

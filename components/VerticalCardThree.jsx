@@ -16,7 +16,7 @@ const VerticalCardThree = ({ number, logo, logoSize = 200, title, description, c
   return (
     <>
       <span
-        className={`h-full min-h-[430px] ${isExpanded ? 'w-[600px] 2xl:w-[768px]' : 'w-[150px] md:w-[200px] lg:w-[200px] 2xl:w-[270px]'
+        className={`h-full min-h-[430px] ${isExpanded ? 'w-[600px] 2xl:w-[768px]' : 'w-[150px] md:w-[200px] lg:w-[200px] 2xl:w-[280px]'
           } transition-all duration-500 ease-in-out flex items-center p-20 text-white montserrat text-[25px] flex-col justify-between bg-cover bg-center relative overflow-hidden`}
         style={{
           backgroundImage: `url('${isExpanded ? backgroundImage : collapsedBackgroundImage}')`,

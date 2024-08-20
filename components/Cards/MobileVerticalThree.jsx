@@ -86,7 +86,7 @@ const MobileVerticalThree = ({
         <div className="flex justify-between items-center mt-8 border-t border-white border-opacity-20 pt-6">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="text-sm justify-center items-center text-center md:text-3xl font-semibold -mt-44 text-[#B8B8B8]">
+              <div className="text-xs justify-center items-center text-center md:text-3xl font-semibold -mt-44 text-[#B8B8B8]">
                 {stat}
               </div>
             </div>
