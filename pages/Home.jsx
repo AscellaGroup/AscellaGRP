@@ -14,7 +14,6 @@ import CalendlyButton from "@/components/CalendlyPopup";
 import "./Globe.css";
 
 import Loader from "@/components/Loader";
-import Card from "@/components/Cards/Card";
 
 const MemoizedWorld = React.memo(World);
 
@@ -211,7 +210,7 @@ const Home = () => {
         </section>
 
 
-        <Card />
+
 
         {isFormVisible && <FormCard onClose={handleCloseForm} />}
       </div>
