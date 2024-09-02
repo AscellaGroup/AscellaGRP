@@ -30,6 +30,7 @@ const validationSchema = Yup.object().shape({
   address: Yup.string().required("Registered Address is required"),
 });
 
+
 const FormCard = ({ onClose }) => {
   const [step, setStep] = useState(1);
   const formRef = useRef(null);
@@ -66,21 +67,25 @@ const FormCard = ({ onClose }) => {
 
   const handleSubmit = async (values) => {
     console.log(step);
+  
     try {
-      const response = await axios.post("/api/submit", values, {
+      // NextJs API route to Google Sheets
+      const response = await axios.post('/api/submit', values, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
-      console.log("Lead created successfully in Zoho CRM", response.data);
-      onClose(); // Close the form after successful submission
+  
+      console.log("Data submitted successfully:", response.data);
+      onClose(); 
     } catch (error) {
       console.error(
-        "Error creating lead in Zoho CRM:",
+        "Error submitting data:",
         error.response ? error.response.data : error.message
       );
     }
   };
+  
 
   const handleClose = () => {
     onClose();
@@ -145,7 +150,8 @@ const FormCard = ({ onClose }) => {
           }}
         >
           {({ values, setFieldValue, validateForm }) => (
-            <Form className="flex-grow">
+            <Form 
+              className="flex-grow" >
               {step === 1 && (
                 <>
                   <div className="mt-0">
