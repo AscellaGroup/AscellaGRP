@@ -6,7 +6,9 @@ import { CustomCheckbox } from "@/components/customCheckbox";
 import { Tooltip } from "@/components/Tooltip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+
 import axios from "axios";
+
 
 const validationSchema = Yup.object().shape({
   personName: Yup.string().required("Name is required"),
@@ -48,10 +50,9 @@ const FormCard = ({ onClose }) => {
     };
   }, [onClose]);
 
-  const handleNext = (validateForm, values) => {
+  const handleNext = (validateForm) => {
     validateForm().then((errors) => {
       if (Object.keys(errors).length === 0) {
-        console.log("handleNext");
         setStep((prevStep) => prevStep + 1);
       }
     });
@@ -66,8 +67,6 @@ const FormCard = ({ onClose }) => {
   };
 
   const handleSubmit = async (values) => {
-    console.log(step);
-  
     try {
       // NextJs API route to Google Sheets
       const response = await axios.post('/api/submit', values, {
@@ -75,8 +74,8 @@ const FormCard = ({ onClose }) => {
           'Content-Type': 'application/json',
         },
       });
-  
-      console.log("Data submitted successfully:", response.data);
+      
+      console.log("Data submitted successfully.");
       onClose(); 
     } catch (error) {
       console.error(
@@ -93,6 +92,7 @@ const FormCard = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 mt-20 px-4 sm:px-6 lg:px-8">
+    
       <div
         ref={formRef}
         className="bg-gradient-to-b from-[#15171D] to-[#040811] p-4 sm:p-6 rounded-2xl shadow-lg w-full max-w-[600px] max-h-[90vh] min-h-[500px] border-[1.2px] border-[#414141] flex flex-col overflow-y-auto relative"
@@ -145,9 +145,6 @@ const FormCard = ({ onClose }) => {
             demandGeneration: false,
           }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
-            console.log("Form data", values);
-          }}
         >
           {({ values, setFieldValue, validateForm }) => (
             <Form 
@@ -661,13 +658,14 @@ const FormCard = ({ onClose }) => {
                     if (step === 2) {
                       handleSubmit(values);
                     } else {
-                      handleNext(validateForm, values);
+                      handleNext(validateForm);
                     }
                   }}
                 />
               </div>
             </Form>
           )}
+          
         </Formik>
       </div>
     </div>
