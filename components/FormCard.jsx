@@ -6,6 +6,7 @@ import { CustomCheckbox } from "@/components/customCheckbox";
 import { Tooltip } from "@/components/Tooltip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { toast, Toaster } from 'react-hot-toast';
 
 import axios from "axios";
 
@@ -657,11 +658,13 @@ const FormCard = ({ onClose }) => {
                   onClick={() => {
                     if (step === 2) {
                       handleSubmit(values);
+                      toast.success("Form submitted! We'll get back to you soon!", {duration: 5000});
                     } else {
                       handleNext(validateForm);
                     }
                   }}
                 />
+                <Toaster position="top-right" reverseOrder={false}/>
               </div>
             </Form>
           )}
