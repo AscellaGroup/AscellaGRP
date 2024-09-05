@@ -75,17 +75,16 @@ const FormCard = ({ onClose }) => {
           'Content-Type': 'application/json',
         },
       });
-      
-      console.log("Data submitted successfully.");
-      onClose(); 
+
     } catch (error) {
       console.error(
         "Error submitting data:",
         error.response ? error.response.data : error.message
       );
     }
+    onClose();
   };
-  
+
 
   const handleClose = () => {
     onClose();
@@ -93,7 +92,7 @@ const FormCard = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 mt-20 px-4 sm:px-6 lg:px-8">
-    
+
       <div
         ref={formRef}
         className="bg-gradient-to-b from-[#15171D] to-[#040811] p-4 sm:p-6 rounded-2xl shadow-lg w-full max-w-[600px] max-h-[90vh] min-h-[500px] border-[1.2px] border-[#414141] flex flex-col overflow-y-auto relative"
@@ -148,7 +147,7 @@ const FormCard = ({ onClose }) => {
           validationSchema={validationSchema}
         >
           {({ values, setFieldValue, validateForm }) => (
-            <Form 
+            <Form
               className="flex-grow" >
               {step === 1 && (
                 <>
@@ -657,18 +656,28 @@ const FormCard = ({ onClose }) => {
                   value={step === 2 ? "Submit" : "Next"}
                   onClick={() => {
                     if (step === 2) {
+                      toast.success("Form submitted! We'll get back to you soon!");
                       handleSubmit(values);
-                      toast.success("Form submitted! We'll get back to you soon!", {duration: 5000});
-                    } else {
+                    }
+                    else {
                       handleNext(validateForm);
                     }
                   }}
                 />
-                <Toaster position="top-right" reverseOrder={false}/>
+                <Toaster
+                  position="top-center"
+                  reverseOrder={false}
+                  toastOptions={{
+                    // Default options for specific types
+                    success: {
+                      duration: 3000
+                    },
+                  }}
+                />
               </div>
             </Form>
           )}
-          
+
         </Formik>
       </div>
     </div>
