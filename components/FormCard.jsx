@@ -7,7 +7,6 @@ import { Tooltip } from "@/components/Tooltip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 import { toast, Toaster } from 'react-hot-toast';
-
 import axios from "axios";
 
 
@@ -93,20 +92,26 @@ const FormCard = ({ onClose }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50 mt-20 px-4 sm:px-6 lg:px-8">
 
-      <div
-        ref={formRef}
-        className="bg-gradient-to-b from-[#15171D] to-[#040811] p-4 sm:p-6 rounded-2xl shadow-lg w-full max-w-[600px] max-h-[90vh] min-h-[500px] border-[1.2px] border-[#414141] flex flex-col overflow-y-auto relative"
-      >
+<div
+      ref={formRef}
+      style={{
+        backgroundImage: "url('/form_background.png')",
+      }}
+      className="bg-cover bg-no-repeat bg-center bg-blend-overlay 
+                 p-4 sm:p-6 rounded-2xl shadow-lg w-full max-w-[600px] max-h-[90vh] min-h-[500px] 
+                 border-[1.2px] border-[#414141] flex flex-col overflow-y-auto relative"
+    >
+
         <button
           onClick={handleClose}
-          className="absolute top-2 right-2 text-white hover:text-gray-300 focus:outline-none"
+          className="absolute top-2 right-2 text-black hover:text-gray-300 focus:outline-none"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
-        <h1 className="montserrat text-center text-white text-[20px] sm:text-[25px] font-medium pb-4 sm:pb-6 mt-0">
+        <h1 className="montserrat text-center text-black text-[20px] sm:text-[25px] font-medium pb-4 sm:pb-6 mt-0">
           Ascella for Startups
         </h1>
 
@@ -153,7 +158,7 @@ const FormCard = ({ onClose }) => {
                 <>
                   <div className="mt-0">
                     <span className="flex text-red-400">*
-                      <h5 className="montserrat text-center italic text-[#888888] text-[10px] sm:text-[12px] font-light pb-4 sm:pb-6 mt-0">If your startup has at least 8 employees, less than 1 million USD in funding, or an ARR (Annual Recurring Revenue) below 0.5 million USD,
+                      <h5 className="montserrat text-center italic text-black text-[10px] sm:text-[12px] font-light pb-4 sm:pb-6 mt-0">If your startup has at least 8 employees, less than 1 million USD in funding, or an ARR (Annual Recurring Revenue) below 0.5 million USD,
                         it qualifies for Ascella for Startups.</h5>
                     </span>
 

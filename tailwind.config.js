@@ -8,30 +8,30 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-      inter: ['Inter', 'sans-serif'],
-      montserrat: ['montserrat', 'sans-serif'],
-      cambria: ['Cambria', 'serif'],
-      almarai: ['almarai', 'sans-serif'],
-    },
+        inter: ['Inter', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+        cambria: ['Cambria', 'serif'],
+        almarai: ['Almarai', 'sans-serif'],
+      },
       colors: {
         bl: {
-          10: '#040811'
-        },
-        screens: {
-          xs: '400px',
-          '3xl': '2200px',
-          '4xl': '2500px',
-        },
-        maxWidth: {
-          '10xl': '1512px',
-        },
-        borderRadius: {
-          0: '0px',
-          '1xl': '4px',
-          '2xl': '22px',
+          10: '#040811',
         },
       },
+      screens: {
+        xs: '400px',
+        '3xl': '2200px',
+        '4xl': '2500px',
+      },
+      maxWidth: {
+        '10xl': '1512px',
+      },
+      borderRadius: {
+        0: '0px',
+        '1xl': '4px',
+        '2xl': '22px',
+      },
     },
-    plugins: [],
-  }
+  },
+  plugins: [],
 }

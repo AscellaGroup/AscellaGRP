@@ -2,10 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const Nav = ({ onShowForm }) => {
+const Nav = ({ onShowForm, isScrolled }) => {
   return (
-    <nav className='bg-bl-10 w-full max-container flexBetween padding-container px-6
-        absolute z-30 py-5 bg-white-10 shadow-md h-[70px]'>
+    <nav className = { `${isScrolled ? "bg-black" : "bg-transparent"} w-full max-container flexBetween padding-container px-6
+    absolute z-30 py-5 shadow-md h-[70px]` }>
       <Link href="/">
         <Image
           src='/Ascella-logo.svg'
@@ -18,8 +18,8 @@ const Nav = ({ onShowForm }) => {
       {/* For PC and Tablet */}
       <div className="gap-10 lg:flex ">
         <img
-          className='h-24 w-24 md:ml-32 md:h-36 md:w-36'
-          src='/Ascella-text.svg'
+          className='h-[10rem] w-[10rem] md:ml-32 md:h-[13rem] md:w-[13rem]'
+          src='/Ascellagrp_logo.svg'
           alt="Ascella_logo"
         />
       </div>
